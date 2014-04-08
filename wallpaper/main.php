@@ -51,22 +51,17 @@ echo '      </div>
 _tpl_mainmenu();
 echo '      </div>
     </div>
+    <div class="breadcrumbs">
 ';
 if($conf['breadcrumbs']){
-  echo '    <div class="breadcrumbs">
-';
   tpl_breadcrumbs();
-  echo '    </div>
-';
-}
-if($conf['youarehere']){
-  echo '    <div class="breadcrumbs">
-';
+} elseif($conf['youarehere']){
   tpl_youarehere();
-  echo '    </div>
-';
 }
-echo '  </div>
+// $translation = &plugin_load('helper','translation');
+// if ($translation) echo $translation->showTranslations();
+echo '    </div>
+  </div>
 ';
 flush();
 if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $ACT != 'login' && $ACT != 'logout' && $ACT != 'profile' && $ACT != 'revisions') {

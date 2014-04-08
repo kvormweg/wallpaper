@@ -92,13 +92,13 @@ function _tpl_mainmenu() {
     }
     $data2[] = $item;
   }  
-  echo html_buildlist($data2,'idx','_html_list_index','html_li_index');
+  echo html_buildlist($data2,'idx','_tpl_list_index','html_li_index');
 }
 
 /* Index item formatter
  * User function for html_buildlist()
 */
-function _html_list_index($item){
+function _tpl_list_index($item){
   global $ID;
   global $conf;
   $ret = '';

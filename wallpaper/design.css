@@ -875,3 +875,8 @@ div.comment_buttons {
   margin: 0.5em 0 0.25em 0;
   padding: 0;
 }
+
+/* translation plugin compatibility */
+.plugin_translation span {
+  display: none;
+}

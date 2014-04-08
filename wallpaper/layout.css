@@ -171,6 +171,7 @@ div.dokuwiki div.mainmenu ul li:hover {
 
 div.dokuwiki div.mainmenu ul ul {
   visibility: hidden;
+  display: none;
   position: absolute;
   min-width: __menuwidth__;
   width: auto;
@@ -211,6 +212,7 @@ div.dokuwiki div.mainmenu ul ul ul {
 
 div.dokuwiki div.mainmenu ul li:hover > ul {
   visibility: visible;
+  display: inline;
 }
 
 div.dokuwiki div.mainmenu ul li.open {
