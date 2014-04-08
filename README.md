@@ -1,77 +1,83 @@
-# DokuCMS Template
+# Wallpaper Template
 ## General Description
 
-This template (templates in Dokuwiki are equivalent to skins in other wiki systems) can be of value if you use Dokuwiki as a lightweight CMS. It is best suited for a wiki with read access for everybody and restricted write access. It is not suited for a totally closed wiki. From version 0.1.1 onward it can be used for a totally open wiki.
+This template offers a semi transparent body over a background image. Its main feature is a static dropdown menu. The Menu supports up to three menu levels (that means three levels of namespaces).
 
-The template offers a sidebar with either an index or content from a wiki page. It is based on the "Arctic" and the default template.
+The name was inspired by photo wallpapers popular in the seventies
 
 ## License
 
 This template is published under the GNU General Public Licence (GPL) V2.
-Special Thanks
 
-Thanks to Andreas Gohr and fellow programmers for creating such a wonderful tool.
-Thanks to Michael Klier for the Arctic template
-Thanks to the users of this template for hints and ideas how to make this template more usable.
+## Special Thanks
+
+This template uses code from the default template and from Michael Klier’s Arctic template.
+
+The CSS-code used in the dropdown menu was inspired by http://www.lwis.net/free-css-drop-down-menu/
+
+The resizable fake background image was inspired by Chris Coyier (http://css-tricks.com/how-to-resizeable-background-image/)
 
 ## Installation
 
-Unpack the file somewhere. Move the directory named `dokucms` into the `/lib/tpl` directory of your Dokuwiki installation.
+Unpack the file somewhere. Move the directory named `wallpaper` into the `/lib/tpl` directory of your Dokuwiki installation.
 
-In the configuration plugin chose dokucms as your template.
-
-## Suggested Dokuwiki Configuration
-
-This template works best with "Hierarchical breadcrumbs" switched on and the corresponding "Number of breadcrumbs" set to "0".
-
-Turning "Use first heading for pagenames" on results in a nicer index.
+In the configuration plugin chose wallpaper as your template.
 
 ## Configuration
 
-Two general looks are included and may be switched by editing the style.ini.
+The basic configuration is done via style.ini. In addition to general dokuwiki style options there are two template specific options (under normal circumstances you will not have to change these):
 ````
-;dokucms special variables
+;wallpaper special variables
 ;---------------------------------------------------------------------------
-__content_width__ = 60em;
-; red look
-; activate either these four lines or the four lines below
-;__text__           = "#300"
-;__imgblend__ = blend_red.png
-;__yourlogo__ = flower_red.png
-;__background_alt__ = "#911"
-
-; blue look
-; activate either these four lines or the four lines above
-__text__           = "#003"
-__yourlogo__ = flower_blue.png
-__imgblend__ = blend_blue.png
-__background_alt__ = "#119"
+; width of menu items
+__menuwidth__= "15em"
+; text color inactive buttons
+__color_disabled__="#ccc"
 ````
-By commenting either the "red" or "blue" lines (with a semicolon!) you can switch the looks.
+Here you can set the width of the submenus __menuwidth__ (CSS width units apply). The text color of inactive buttons __color_disabled__ should only be changed if your reconfigure the whole color scheme.
 
-From version 0.4.4 you can define the maximum width (`__content_width__`) of the content area (page width minus sidebar column). All CSS distance units apply. The smallest possible value is 700 pixel (55em). The minimum width of the entire page is 950 pixel. The maximum value can be as high as you like. High values result in long lines on large monitors which can be hard to read.
+Further configuration can be done via the configuration dialog in the admin functions:
 
-If you want to use another logo, prepare a picture with max dimension of 230 pixel width and 92 pixel height. Copy this picture into the image folder of the template. Edit the (activated) __yourlogo__ line in the style.ini accordingly.
+## Configuration options
 
-The template has six configuration options:
+* clean index: this option will remove the standard dokuwiki namespaces (‚wiki‘ and ‚playground‘) from the menu (default: off).
+* clean index of further namespaces comma separated list of namespaces to be removed from the index if “clean index” is switched on (default: empty).
+* show backlink button: will show a backlink button in the bottom bar (default: off).
+* show search box if logged in: will show a search box, if you are logged in (default: off).
+* create a submenu for pages in the root namespace: this option will put all pages in the top level namespace into a sub menu instead of listing each in the topmost menu level (default: off).
+* the menu is based on a user-supplied file: this option will switch off the automatically generated menu and look for a menu file (the name can be configured in the next option) for the menu. For syntax of this file see below. (default: off).
+* menu file name: configure the file name for the menu file (without .txt extension) (default: menu).
 
-* sidebar content can be either "file" or "index". This option controls the content of the sidebar. The default option is "index".
-  * file: Displays the content of a file in the sidebar. The file has to be named sidebar. You can define a sidebar for every namespace in your wiki. If a namespace contains no sidebar, the file from the namespace above will be used. If the file option is chosen and no sidebar file exists, the sidebar will remain empty.
-  * index: The sidebar contains the index of all pages in your wiki, alphabetically sorted. Namespaces are displayed as closed sublist that open if you open a page in the namespace. Sidebar pages are always excluded from the index.
-* clean index will remove the standard dokuwiki namespaces ('wiki' and 'playground') from the index if switched on (default: off) (for "index" sidebar content).
-* clean index of further namespaces comma separated list of namespaces to be removed from the index if "clean index" is switched on (default: empty) (for "index" sidebar content).
-* show edit button in sidebar: will show an edit button in the sidebar if you may edit the contents of the sidebar (default: on) (for "file" sidebar content)
-* show backlink button: will show a backlink button in the bottom bar (default: off)
-* show search box if logged in: will show a search box, if you are logged in (default: off)
+## Menu file syntax
 
-## Update
+Prepare a wiki file with a structure of unordered list of links. This structure may be three levels deep. These links will be used to construct the menu. The file must be saved in the root namepsace of your wiki.
 
-Backup your DOKUWIKI_ROOT/lib/tpl/dokucms/style.ini. Unpack the file in DOKUWIKI_ROOT/lib/tpl/. This will overwrite the current template with the new version. Overwrite the delivered style.ini with your backup copy, if there were no changes to style.ini content. I will explicitly list style.ini changes in the changelog.
-Otherwise you will have to check for differences between your backup copy and the default style.ini. I recommend meld for that purpose.
-Recommendation
+Example:
+````
+=====My menu=====
+  * [[first level item]]
+  * [[first level item]]
+    * [[second level item]]
+    * [[second level item]]
+      * [[third level item]]
+  * [[first level item]]
+````
+Non-list lines (like the heading in the example) will be ignored. List lines without wikilinks will be ignored too. Links that do not point to existing files will be eliminated from the menu.
 
-Clean the cache (DOKUWIKI_ROOT/data/cache) after installation or update of this template.
+If a linked page is a start page of a namespace it will be always be shown in the menu as if this page has sub-entries in the menu even if that is not the case.
+
+## Suggested Dokuwiki Configuration
+
+This template works best with “Hierarchical breadcrumbs” switched on and the corresponding “Number of breadcrumbs” set to “0”.
+
+Switching “Use first heading for pagenames” to “Always” or “Navigation” results in a nicer menu.
+
+## Background Image
+
+The background image can be changed if you drop a JPG-image named `bg.jpg` into the `images` directory inside the template directory.
+
+The background image should be at least as wide as the biggest possible window width. The image should have a color gradient fading into black in the bottom.
 
 ## Browser compatibility
 
-This template works well with current Opera, Firefox, Google Chrome and Internet Explorer (from Version 8 upwards). Safari has a problem displaying the color blend in the page header correctly, but works otherwise. With IE6 all functions work, but there are some display faults.
+This template works well with current Firefox and Google-Chrome. I have not tested other browsers yet. As this template uses PNG transparency it should look awful in Internet Explorer 6.

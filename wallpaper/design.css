@@ -638,12 +638,12 @@ div.dokuwiki a.fn_bot {
 
 /* insitu-footnotes */
 div.insitu-footnote {
-  font-size: 80%;
+  font-size: 90%;
   line-height: 1.2em;
   border: 1px solid __border__;
-  background-color: __background_other__;
+  background-color: __background__;
   text-align: left;
-  padding: 4px;
+  padding: 0.5em;
   max-width: 40%;    /* IE's width is handled in javascript */
   min-width: 5em;
 }
@@ -840,7 +840,6 @@ legend  {
   padding: 0 0.5em 1em 0.5em;
   font-size: 75%;
 }
-
 /* blog plugin compatibility */
 div.comment_wrapper {
   background-color: __background_neu__ !important;
