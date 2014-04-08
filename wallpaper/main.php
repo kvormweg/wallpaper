@@ -43,7 +43,7 @@ require_once(dirname(__FILE__).'/tpl_functions.php');
 
       <div class="clearer"></div>
 	   <div class="mainmenu">
-       <?php tpl_mainmenu('left'); ?>
+       <?php _tpl_mainmenu(); ?>
       </div>
     </div>
 
@@ -84,7 +84,7 @@ require_once(dirname(__FILE__).'/tpl_functions.php');
   		   <a href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="<?php echo DOKU_TPL; ?>images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" /></a>
    	 <a href="<?php echo DOKU_BASE; ?>feed.php" title="Recent changes RSS feed"><img src="<?php echo DOKU_TPL; ?>images/button-rss.png" width="80" height="15" alt="Recent changes RSS feed" /></a>
     </div>
-    <?php wallpaper_pageinfo(); ?>
+    <?php _tpl_pageinfo(); ?>
     </div>
     <?php } else { ?>
     <div class="meta">
@@ -100,7 +100,6 @@ require_once(dirname(__FILE__).'/tpl_functions.php');
            <?php tpl_button('admin')?>
    <?php if($ACT != 'login' && $ACT != 'logout') { ?>        
            <?php tpl_button('login')?>&nbsp;
-           <?php //tplSwitcher('dokucms', 'Switch to DokuCMS template')?>
    <?php }?>
    <?php if($_SERVER['REMOTE_USER']){ ?>
            <?php tpl_button('subscribe')?>

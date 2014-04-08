@@ -69,5 +69,5 @@
 /*FIXME maybe move to a more general style sheet*/
 .ondrag {
     cursor: move;
-    /* opacity: 0.8; */
+    opacity: 0.8;
 }

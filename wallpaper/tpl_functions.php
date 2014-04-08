@@ -12,7 +12,7 @@
 if (!defined('DOKU_INC')) die();
 
 /* prints the menu */
-function tpl_mainmenu() {
+function _tpl_mainmenu() {
   require_once(DOKU_INC.'inc/search.php');
   global $conf;
   global $ID;
@@ -50,19 +50,19 @@ function tpl_mainmenu() {
       }
     }
     if($conf['tpl'][$tpl]['hiderootlinks']) {
-		$item2 = array();
+			$item2 = array();
     	if($item['type'] == 'f' and !$item['ns']) {
     		if($first) {
-			  $item2['id'] ='start';
-           $item2['ns'] = 'root';
-           $item2['perm'] = 8;
-           $item2['type'] = 'd';
-           $item2['level'] = 1;
-           $item2['open'] = 1;
-           $item2['title'] = 'Start';
-		     $data2[] = $item2;
-		     $first = false;
-         }
+			  	$item2['id'] ='start';
+          $item2['ns'] = 'root';
+          $item2['perm'] = 8;
+          $item2['type'] = 'd';
+          $item2['level'] = 1;
+          $item2['open'] = 1;
+          $item2['title'] = 'Start';
+		     	$data2[] = $item2;
+		      $first = false;
+        }
     		$item['ns'] = 'root';
     		$item['level'] = 2;
     	}	
@@ -95,7 +95,7 @@ function _html_list_index($item){
 }
 
 # wallpaper modified version of pageinfo 
-function wallpaper_pageinfo(){
+function _tpl_pageinfo(){
   global $conf;
   global $lang;
   global $INFO;
@@ -105,8 +105,8 @@ function wallpaper_pageinfo(){
   // return if we are not allowed to view the page
   if (!auth_quickaclcheck($ID)) { return; }
   
-  // prepare date and path
-  $date = strftime($conf['dformat'],$INFO['lastmod']);
+  // prepare date
+  $date = dformat($INFO['lastmod']);
 
   // echo it
   if($INFO['exists']){
