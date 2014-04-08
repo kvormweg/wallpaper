@@ -57,6 +57,16 @@ function _tpl_mainmenu() {
   if(!$conf['tpl'][$tpl]['usemenufile'] or ($conf['tpl'][$tpl]['usemenufile'] and !$ff)) {
   	search($data,$conf['datadir'],'search_universal',$opts);
   }
+  $i = 0;
+  $cleanindexlist = array();
+  if($conf['tpl'][$tpl]['cleanindexlist']) {
+   	$cleanindexlist = explode(',', $conf['tpl'][$tpl]['cleanindexlist']);
+   	$i = 0;
+   	foreach($cleanindexlist as $tmpitem) {
+   		$cleanindexlist[$i] = trim($tmpitem);
+   		$i++;
+   	}
+	}
   $data2 = array();
 	$first = true;
   foreach($data as $item) {
@@ -65,13 +75,23 @@ function _tpl_mainmenu() {
          or strpos($item['id'], 'wiki') !== false) {
         continue;
       }
+      if(count($cleanindexlist)) {
+      	if(strpos($item['id'], ':')) {
+      		list($tmpitem) = explode(':',$item['id']);
+      	} else {
+      		$tmpitem = $item['id'];
+      	}
+	      if(in_array($tmpitem, $cleanindexlist)) {
+	        continue;
+	      }
+			}
     }
     if(strpos($item['id'],$menufilename) !== false and $item['level'] == 1) {
     	continue;
     }
     if($conf['tpl'][$tpl]['hiderootlinks']) {
 			$item2 = array();
-    	if($item['type'] == 'f' and !$item['ns']) {
+    	if($item['type'] == 'f' and !$item['ns'] and $item['id']) {
     		if($first) {
 			  	$item2['id'] ='start';
           $item2['ns'] = 'root';
@@ -202,22 +222,18 @@ function _tpl_pageinfo(){
   $date = dformat($INFO['lastmod']);
 
   // echo it
-  if($INFO['exists']){
+  if($INFO['exists']) {
     echo $lang['lastmod'];
     echo ': ';
     echo $date;
-    if($_SERVER['REMOTE_USER']){
-      if($INFO['editor']){
-        echo ' '.$lang['by'].' ';
-        echo $INFO['editor'];
-      }else{
-        echo ' ('.$lang['external_edit'].')';
+    if($_SERVER['REMOTE_USER']) {
+      if($INFO['editor']) {
+        echo ' ',$lang['by'],' ', $INFO['editor'];
+      } else {
+        echo ' (',$lang['external_edit'],')';
       }
       if($INFO['locked']){
-        echo ' &middot; ';
-        echo $lang['lockedby'];
-        echo ': ';
-        echo $INFO['locked'];
+        echo ' &middot; ', $lang['lockedby'], ': ', $INFO['locked'];
       }
     }
     return true;

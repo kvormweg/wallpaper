@@ -8,6 +8,7 @@
  */
 
 $meta['cleanindex'] = array('onoff');
+$meta['cleanindexlist'] = array('string');
 $meta['showsearch'] = array('onoff');
 $meta['showbacklinks'] = array('onoff');
 $meta['showmedia'] = array('onoff');
