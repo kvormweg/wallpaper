@@ -71,7 +71,7 @@ div.dokuwiki textarea.edit {
   font-family: monospace, serif;
   /* second generic font fixes problem with font-size, see
      http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/ */
-  font-size: 1.25em;
+  font-size: 1em;
   color: __text__;
   background-color: __background_neu__;
   border: 1px solid __border__;
@@ -429,7 +429,7 @@ div.dokuwiki code {
   font-family: monospace, serif;
   /* second generic font fixes problem with font-size, see
      http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/ */
-  font-size: 1.25em;
+  font-size: 1em;
 }
 div.dokuwiki pre {
   padding: 0.5em;
