@@ -291,7 +291,7 @@ div.dokuwiki a.wikilink2 {
 /* ------------- Page elements ----------------- */
 
 div.dokuwiki div.preview {
-  background-color: __background_other__;
+  background-color: __background_alt__;
   margin: 0 0 0 2em;
   padding: 4px;
   border: 1px dashed __text__;
@@ -690,9 +690,9 @@ div.footerinc {
 .footerinc a img {
     border: 0;
 }
-.footerinc a:hover img {
+/* .footerinc a:hover img {
     opacity: 1;
-}
+} */
 
 
 /* ---------- AJAX quicksearch ----------- */

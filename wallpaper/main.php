@@ -33,6 +33,7 @@ require_once(dirname(__FILE__).'/tpl_functions.php');
 
 <body>
 <div class="dokuwiki">
+   <img id="fakebackground" src="<?php echo DOKU_TPL?>images/bg.jpg" alt="" />
   <?php html_msgarea()?>
   <div class="stylehead">
     <div class="header">
@@ -121,7 +122,7 @@ require_once(dirname(__FILE__).'/tpl_functions.php');
       <div class="clearer"></div>
     </div>
   </div>
+  <div class="no"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
 </div>
-<div class="no"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
 </body>
 </html>

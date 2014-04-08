@@ -50,19 +50,19 @@ function tpl_mainmenu() {
       }
     }
     if($conf['tpl'][$tpl]['hiderootlinks']) {
-			$item2 = array();
+		$item2 = array();
     	if($item['type'] == 'f' and !$item['ns']) {
     		if($first) {
-					$item2['id'] ='start';
-          $item2['ns'] = 'root';
-          $item2['perm'] = 8;
-          $item2['type'] = 'd';
-          $item2['level'] = 1;
-          $item2['open'] = 1;
-          $item2['title'] = 'Start';
-			    $data2[] = $item2;
-			    $first = false;
-        }
+			  $item2['id'] ='start';
+           $item2['ns'] = 'root';
+           $item2['perm'] = 8;
+           $item2['type'] = 'd';
+           $item2['level'] = 1;
+           $item2['open'] = 1;
+           $item2['title'] = 'Start';
+		     $data2[] = $item2;
+		     $first = false;
+         }
     		$item['ns'] = 'root';
     		$item['level'] = 2;
     	}	
@@ -72,7 +72,7 @@ function tpl_mainmenu() {
     }
     $data2[] = $item;
   }  
-	echo html_buildlist($data2,'idx','_html_list_index','html_li_index');
+  echo html_buildlist($data2,'idx','_html_list_index','html_li_index');
 }
 
 /* Index item formatter
