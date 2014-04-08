@@ -1,4 +1,8 @@
-/* --- popup --- */
+/**
+ * Media option popup styles for Wallpaper Template
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ */
 
 #media__popup {
     background-color:__background__;

@@ -11,4 +11,6 @@ $meta['cleanindex'] = array('onoff');
 $meta['showsearch'] = array('onoff');
 $meta['showbacklinks'] = array('onoff');
 $meta['hiderootlinks'] = array('onoff');
+$meta['usemenufile'] = array('onoff');
+$meta['menufilename'] = array('string');
 ?>

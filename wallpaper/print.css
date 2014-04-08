@@ -1,3 +1,9 @@
+/**
+ * Print styles for Wallpaper Template
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Klaus Vormweg <klaus.vormweg@gmx.de>
+ */
 
 body {
   font: 10pt Times,'Times New Roman',serif;
@@ -43,7 +49,10 @@ div.error,
 div.breadcrumbs,
 div.homelink,
 div.sidebar,
-div.secedit {
+div.secedit,
+div.bar,
+div.mainmenu,
+img#fakebackground {
   display: none;
 }
 

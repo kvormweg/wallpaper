@@ -100,6 +100,7 @@ require_once(dirname(__FILE__).'/tpl_functions.php');
            <?php tpl_button('admin')?>
    <?php if($ACT != 'login' && $ACT != 'logout') { ?>        
            <?php tpl_button('login')?>&nbsp;
+           <?php //tplSwitcher('dokucms', 'Switch to DokuCMS template')?>
    <?php }?>
    <?php if($_SERVER['REMOTE_USER']){ ?>
            <?php tpl_button('subscribe')?>

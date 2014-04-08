@@ -40,14 +40,34 @@ function _tpl_mainmenu() {
   $ns  = utf8_encodeFN(str_replace(':','/',$ns));
 
   $data = array();
-  search($data,$conf['datadir'],'search_universal',$opts);
+  $ff = TRUE;
+  if($conf['tpl'][$tpl]['usemenufile']) {
+  	if($conf['tpl'][$tpl]['menufilename']) {
+  		$menufilename = $conf['tpl'][$tpl]['menufilename'];
+  	} else {
+  		$menufilename = 'menu';
+		}
+		$filepath = wikiFN($menufilename);
+		if(!file_exists($filepath)) {
+			$ff = FALSE;
+		} else {
+  		_tpl_parsemenufile($data, $menufilename, $start);
+		} 
+  } 
+  if(!$conf['tpl'][$tpl]['usemenufile'] or ($conf['tpl'][$tpl]['usemenufile'] and !$ff)) {
+  	search($data,$conf['datadir'],'search_universal',$opts);
+  }
   $data2 = array();
 	$first = true;
   foreach($data as $item) {
     if($conf['tpl'][$tpl]['cleanindex']) {
-      if(strpos($item['id'],'playground') !== false or strpos($item['id'], 'wiki') !== false) {
+      if(strpos($item['id'],'playground') !== false 
+         or strpos($item['id'], 'wiki') !== false) {
         continue;
       }
+    }
+    if(strpos($item['id'],$menufilename) !== false and $item['level'] == 1) {
+    	continue;
     }
     if($conf['tpl'][$tpl]['hiderootlinks']) {
 			$item2 = array();
@@ -91,6 +111,79 @@ function _html_list_index($item){
   } else {
     $ret .= html_wikilink(':'.$item['id']);
   }
+  return $ret;
+}
+
+function _tpl_parsemenufile(&$data, $filename, $start) {
+  $ret = TRUE;
+	$filepath = wikiFN($filename);
+	if(file_exists($filepath)) {
+		$lines = file($filepath);
+		$i = 0;
+		$lines2 = array();
+// read only lines formatted as wiki lists
+		foreach($lines as $line) {
+			if(preg_match('/^\s+\*/', $line)) {
+				$lines2[] = $line;
+			}
+			$i++;
+		}
+		$numlines = count($lines2);
+		$oldlevel = 0;		
+// Array is read back to forth so pages with children can be found easier
+// you do not have to go back in the array if a child entry is found		
+		for($i = $numlines - 1;$i >= 0; $i--) {
+			if(!$lines2[$i]) {
+				continue;
+			}
+			$tmparr = explode('*', $lines2[$i]);
+			$level = intval(strlen($tmparr[0]) / 2);
+			if($level > 3) {
+				$level = 3;
+			}
+// ignore lines without links			
+			if(!preg_match('/\s*\[\[[^\]]+\]\]/', $tmparr[1])) {
+				continue;
+			}
+			$tmparr[1] = str_replace(array(']','['),'',trim($tmparr[1]));
+			list($id, $title) = explode('|', $tmparr[1]);
+// ignore links to non-existing pages			
+			if(!file_exists(wikiFN($id))) {
+				continue;
+			}
+      if(!$title) {
+      	$title = p_get_first_heading($id);
+      }	
+			$data[$i]['id'] = $id;
+      $data[$i]['ns'] = '';
+      $data[$i]['perm'] = 8;
+      $data[$i]['type'] = 'f';
+			$data[$i]['level'] = $level;				
+      $data[$i]['open'] = 1;
+			$data[$i]['title'] = $title;
+// namespaces must be tagged correctly or they will not be found by the
+// html_wikilink function : means that they will marked as having subpages
+// even if there is no submenu			
+			if(strpos($id,':') !== FALSE) {
+				$nsarray = explode(':', $id);
+				$pid = array_pop($nsarray);
+				$nspace = implode(':',$nsarray);
+				if($pid == $start) {
+					$data[$i]['id'] = $nspace;
+					$data[$i]['type'] = 'd';
+				} else {
+					$data[$i]['ns'] = $nspace;
+				}
+			}
+			if($oldlevel > $level) {
+				$data[$i]['type'] = 'd';
+			}		
+			$oldlevel = $level;
+		}
+	} else {
+		$ret = FALSE;
+	}
+	ksort($data);
   return $ret;
 }
 

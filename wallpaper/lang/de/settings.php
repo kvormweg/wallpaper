@@ -10,4 +10,6 @@ $lang['cleanindex'] = 'Index bereinigen';
 $lang['showsearch'] = 'Suchfeld anzeigen, wenn angemeldet';
 $lang['showbacklinks'] = 'Backlink-Knopf anzeigen';
 $lang['hiderootlinks'] = 'Ein Untermenü für Seiten des Wurzel-Namensraums erzeugen';
+$lang['usemenufile'] = 'Eine eigene Menüstruktur in einer Datei beretstellen';
+$lang['menufilename'] = 'Dateiname für das Menü';
 ?>
