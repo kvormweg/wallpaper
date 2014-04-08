@@ -10,6 +10,7 @@
 $conf['tpl']['wallpaper']['cleanindex'] = 0;  // 1 or 0
 $conf['tpl']['wallpaper']['showsearch'] = 0;  // 1 or 0
 $conf['tpl']['wallpaper']['showbacklinks'] = 0;  // 1 or 0
+$conf['tpl']['wallpaper']['showmedia'] = 0;  // 1 or 0
 $conf['tpl']['wallpaper']['hiderootlinks'] = 0;  // 1 or 0
 $conf['tpl']['wallpaper']['usemenufile'] = 0;  // 1 or 0
 $conf['tpl']['wallpaper']['menufilename'] = 'menu';  // string

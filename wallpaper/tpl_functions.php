@@ -104,12 +104,12 @@ function _html_list_index($item){
   $ret = '';
   if($item['type']=='d'){
     if(@file_exists(wikiFN($item['id'].':'.$conf['start']))) {
-      $ret .= html_wikilink($item['id'].':'.$conf['start']);
+      $ret .= html_wikilink($item['id'].':'.$conf['start'], $item['title']);
     } else {
-      $ret .= html_wikilink($item['id'].':');
+      $ret .= html_wikilink($item['id'].':', $item['title']);
     }
   } else {
-    $ret .= html_wikilink(':'.$item['id']);
+    $ret .= html_wikilink(':'.$item['id'], $item['title']);
   }
   return $ret;
 }
@@ -161,7 +161,7 @@ function _tpl_parsemenufile(&$data, $filename, $start) {
 			$data[$i]['level'] = $level;				
       $data[$i]['open'] = 1;
 			$data[$i]['title'] = $title;
-// namespaces must be tagged correctly or they will not be found by the
+// namespaces must be tagged correctly (type = 'd') or they will not be found by the
 // html_wikilink function : means that they will marked as having subpages
 // even if there is no submenu			
 			if(strpos($id,':') !== FALSE) {

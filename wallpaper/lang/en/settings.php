@@ -9,6 +9,7 @@
 $lang['cleanindex'] = 'clean index';
 $lang['showsearch'] = 'show search box if logged in';
 $lang['showbacklinks'] = 'show backlink button';
+$lang['showmedia'] = 'show media manager button if not logged in';
 $lang['hiderootlinks'] = 'create a sub menu for pages in the root namespace';
 $lang['usemenufile'] = 'the menu is based on a user-supplied file';
 $lang['menufilename'] = 'menu file name';

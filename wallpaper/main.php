@@ -13,117 +13,146 @@ if (!defined('DOKU_INC')) die();
 // include custom template functions stolen from arctic template 
 require_once(dirname(__FILE__).'/tpl_functions.php');
 
-?>
+echo '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang']?>"
- lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction']?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="', $conf['lang'], '"
+ lang="', $conf['lang'],'" dir="', $lang['direction'], '">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>
-    <?php tpl_pagetitle()?>
-    [<?php echo strip_tags($conf['title'])?>]
-  </title>
+';
+tpl_pagetitle();
+echo '[', strip_tags($conf['title']), ']';
+echo '</title>
+';
 
-  <?php tpl_metaheaders()?>
-  <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
+tpl_metaheaders();
+echo tpl_favicon(array('favicon', 'mobile'));
 
-  </head>
+echo '  </head>
 
 <body>
 <div class="dokuwiki">
-   <img id="fakebackground" src="<?php echo DOKU_TPL?>images/bg.jpg" alt="" />
-  <?php html_msgarea()?>
-  <div class="stylehead">
+   <img id="fakebackground" src="', DOKU_TPL, 'images/bg.jpg" alt="" />
+';
+html_msgarea();
+echo '  <div class="stylehead">
     <div class="header">
-      <div class="pagename">
-        <?php tpl_link(wl(),$conf['title'],'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"')?>
-      </div>
+      <div class="pagename">';
+      
+tpl_link(wl(),$conf['title'],'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"');
+echo '      </div>
 
-      <div class="clearer"></div>
+     <div class="clearer"></div>
 	   <div class="mainmenu">
-       <?php _tpl_mainmenu(); ?>
+';
+
+_tpl_mainmenu();
+echo '      </div>
+    </div>
+';
+if($conf['breadcrumbs']){
+  echo '    <div class="breadcrumbs">
+';
+  tpl_breadcrumbs();
+  echo '    </div>
+';
+}
+if($conf['youarehere']){
+  echo '    <div class="breadcrumbs">
+';
+  tpl_youarehere();
+  echo '    </div>
+';
+}
+echo '  </div>
+';
+flush();
+if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $ACT != 'login' && $ACT != 'logout' && $ACT != 'profile' && $ACT != 'revisions') {
+  echo '  <div class="wrap">
+     <div class="page">
+';
+  tpl_content();
+  echo '
+     </div>
+  </div>';
+} else {
+  echo '  <div class="wrap">
+     <div class="page" style="margin-left:0; max-width: 78em;">
+';
+  tpl_content();
+  echo '   </div>
+  </div>
+';
+}
+tpl_flush();
+echo '  <div class="stylefoot">
+';
+if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $ACT != 'login' && $ACT != 'logout' && $ACT != 'profile' && $ACT != 'revisions') {
+  echo '    <div class="meta">
+     <div class="homelink">
+  		   <a href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="', DOKU_TPL, 'images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" /></a>
+   	 <a href="', DOKU_BASE, 'feed.php" title="Recent changes RSS feed"><img src="', DOKU_TPL, 'images/button-rss.png" width="80" height="15" alt="Recent changes RSS feed" /></a>
+    </div>
+';
+  _tpl_pageinfo();
+  echo '  </div>
+';
+} else {
+  echo '  <div class="meta">
+     <div class="homelink">
+  		   <a href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="', DOKU_TPL, 'images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" /></a>
+    	 <a href="', DOKU_BASE, 'feed.php" title="Recent changes RSS feed"><img src="', DOKU_TPL, 'images/button-rss.png" width="80" height="15" alt="Recent changes RSS feed" /></a>
       </div>
     </div>
-
-    <?php if($conf['breadcrumbs']){?>
-    <div class="breadcrumbs">
-      <?php tpl_breadcrumbs()?>
-    </div>
-    <?php }?>
-
-    <?php if($conf['youarehere']){?>
-    <div class="breadcrumbs">
-      <?php tpl_youarehere() ?>
-    </div>
-    <?php }?>
-
-  </div>
-  <?php flush()?>
-  <?php if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $ACT != 'login' && $ACT != 'logout' && $ACT != 'profile' && $ACT != 'revisions') { ?>
-  <div class="wrap">
-     <div class="page">
-       <?php tpl_content(); ?>
-     </div>
-  </div>
-  <?php } else { ?>
-  <div class="wrap">
-     <div class="page" style="margin-left:0; max-width: 78em;">
-       <?php tpl_content(); ?>
-     </div>
-  </div>
-  <?php } ?>
-  <?php tpl_flush()?>
-
-  <div class="stylefoot">
-     <?php if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $ACT != 'login' && $ACT != 'logout' && $ACT != 'profile' && $ACT != 'revisions') { ?>
-
-    <div class="meta">
-     <div class="homelink">
-  		   <a href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="<?php echo DOKU_TPL; ?>images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" /></a>
-   	 <a href="<?php echo DOKU_BASE; ?>feed.php" title="Recent changes RSS feed"><img src="<?php echo DOKU_TPL; ?>images/button-rss.png" width="80" height="15" alt="Recent changes RSS feed" /></a>
-    </div>
-    <?php _tpl_pageinfo(); ?>
-    </div>
-    <?php } else { ?>
-    <div class="meta">
-     <div class="homelink">
-  		   <a href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="<?php echo DOKU_TPL; ?>images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" /></a>
-   	 <a href="<?php echo DOKU_BASE; ?>feed.php" title="Recent changes RSS feed"><img src="<?php echo DOKU_TPL; ?>images/button-rss.png" width="80" height="15" alt="Recent changes RSS feed" /></a>
-    </div>
-    </div>
-    <?php } ?>
-
-    <div class="bar" id="bar__bottom">
+';
+}
+echo '    <div class="bar" id="bar__bottom">
        <div class="bar-left" id="bar__bottomleft">
-           <?php tpl_button('admin')?>
-   <?php if($ACT != 'login' && $ACT != 'logout') { ?>        
-           <?php tpl_button('login')?>&nbsp;
-           <?php //tplSwitcher('dokucms', 'Switch to DokuCMS template')?>
-   <?php }?>
-   <?php if($_SERVER['REMOTE_USER']){ ?>
-           <?php tpl_button('subscribe')?>
-           <?php tpl_button('profile')?>
-           <?php tpl_button('history')?>
-   <?php }?>
-          &nbsp;
+';
+tpl_button('admin');
+if($ACT != 'login' && $ACT != 'logout') {        
+  tpl_button('login');
+  echo '&nbsp;';
+}
+if($_SERVER['REMOTE_USER']){
+  tpl_button('subscribe');
+  tpl_button('profile');
+  tpl_button('history');
+}
+echo '&nbsp;
        </div>
        <div class="bar-right" id="bar__bottomright">
-   <?php if(!$_SERVER['REMOTE_USER'] && $ACT != 'login' && $ACT != 'logout'){ ?> 
-     <?php if(!$conf['tpl']['wallpaper']['showsearch']) { ?>  
-       <?php tpl_searchform()?>
-     <?php }?>
-   <?php }?>
-     <?php if($conf['tpl']['wallpaper']['showsearch']) { ?>  
-           <?php tpl_searchform()?>&nbsp;
-     <?php } ?>
-           <?php tpl_button('media')?>
-           <?php tpl_button('edit')?>
-      </div>
+';
+if(!$_SERVER['REMOTE_USER'] && $ACT != 'login' && $ACT != 'logout'){ 
+  if(!$conf['tpl']['wallpaper']['showsearch']) {  
+    tpl_searchform();
+  }
+  if($conf['tpl']['wallpaper']['showmedia']) {   
+    tpl_button('media');
+  }
+} else {
+  if($ACT != 'login' && $ACT != 'logout'){
+    if($conf['tpl']['wallpaper']['showsearch']) {  
+      tpl_searchform();
+      echo '&nbsp';
+    }
+    tpl_button('media');
+  }
+}
+tpl_button('edit');
+echo '    </div>
       <div class="clearer"></div>
     </div>
   </div>
-  <div class="no"><?php /* provide DokuWiki housekeeping, required in all templates */ tpl_indexerWebBug()?></div>
+  <div class="no">
+';
+/* provide DokuWiki housekeeping, required in all templates */ 
+tpl_indexerWebBug();
+echo '</div>
 </div>
 </body>
 </html>
+';
+?>
