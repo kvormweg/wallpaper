@@ -26,10 +26,9 @@ require_once(dirname(__FILE__).'/tpl_functions.php');
   </title>
 
   <?php tpl_metaheaders()?>
+  <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
 
-  <link rel="shortcut icon" href="<?php echo DOKU_TPL?>images/favicon.ico" />
-
-</head>
+  </head>
 
 <body>
 <div class="dokuwiki">
@@ -118,6 +117,7 @@ require_once(dirname(__FILE__).'/tpl_functions.php');
      <?php if($conf['tpl']['wallpaper']['showsearch']) { ?>  
            <?php tpl_searchform()?>&nbsp;
      <?php } ?>
+           <?php tpl_button('media')?>
            <?php tpl_button('edit')?>
       </div>
       <div class="clearer"></div>

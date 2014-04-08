@@ -235,6 +235,12 @@ div.dokuwiki div.pagenav-next {
     width: 49%
 }
 
+/* ----------- type of recent changes select -------- */
+
+div.dokuwiki form#dw__recent select {
+    margin-bottom: 10px;
+}
+
 /* --------------- Links ------------------ */
 
 div.dokuwiki a:link,
@@ -479,15 +485,10 @@ div.dokuwiki dl.code dt {
 }
 
 div.dokuwiki dl.file dt {
-    background-color: __background_alt__;
-    border-bottom: 1px solid __background_alt__;
+  background: url(images/trans50.png) repeat 0 0 __background_neu__;
+  border-bottom: 1px solid __background_neu__;
 }
 
-
-/* inline code words */
-div.dokuwiki code {
-  font-size: 120%;
-}
 
 /* inline tables */
 div.dokuwiki table.inline {
