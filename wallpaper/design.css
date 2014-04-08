@@ -109,7 +109,7 @@ div.dokuwiki input.missing {
   font-size: 100%;
   border: 1px solid __border__;
   color: __text__;
-  background-color: #fcc;
+  background-color: #ffcccc;
   vertical-align: middle;
   margin: 1px;
   padding: 0.20em 0.3em;
@@ -160,8 +160,19 @@ div.dokuwiki a#vorschau {
   clear: both;
   margin-top: 1em;
 }
-/* --------- buttons ------------------- */
 
+div.dokuwiki div.license {
+  padding: 0.5em;
+  font-size: 90%;
+  text-align: center;
+}
+
+div.dokuwiki form#dw__editform div.license {
+  clear: left;
+  font-size: 90%;
+}
+
+/* --------- buttons ------------------- */
 
 div.dokuwiki input.button,
 div.dokuwiki button.button {
@@ -397,10 +408,10 @@ div.dokuwiki .li {
   margin-bottom: 0.1em;
 }
 
-div.dokuwiki ol {list-style-type: decimal;}
-div.dokuwiki ol ol {list-style-type: upper-roman;}
-div.dokuwiki ol ol ol {list-style-type: lower-alpha;}
-div.dokuwiki ol ol ol ol {list-style-type: lower-greek;}
+div.dokuwiki ol { list-style-type: decimal; }
+div.dokuwiki ol ol { list-style-type: upper-roman; }
+div.dokuwiki ol ol ol { list-style-type: lower-alpha; }
+div.dokuwiki ol ol ol ol { list-style-type: lower-greek; }
 
 div.dokuwiki blockquote {
   border-left: 2px solid __border__;
@@ -408,6 +419,7 @@ div.dokuwiki blockquote {
 }
 
 div.dokuwiki pre {
+  font-family: monospace;
   font-size: 120%;
   padding: 0.5em;
   border: 1px dashed __border__;
@@ -425,15 +437,11 @@ div.dokuwiki pre.code {
   background: url(images/trans50.png) repeat 0 0 transparent;
 }
 
-/* inline code words */
-div.dokuwiki code {
-  font-size: 120%;
-}
-
 /* code blocks by file tag */
 div.dokuwiki pre.file {
   background: url(images/trans50.png) repeat 0 0 transparent;
 }
+
 /* filenames for file and code blocks */
 div.dokuwiki dl.file,
 div.dokuwiki dl.code {
@@ -464,6 +472,11 @@ div.dokuwiki dl.file dt {
     border-bottom: 1px solid __background_alt__;
 }
 
+
+/* inline code words */
+div.dokuwiki code {
+  font-size: 120%;
+}
 
 /* inline tables */
 div.dokuwiki table.inline {
@@ -574,6 +587,20 @@ div.dokuwiki table.diff th {
   font-weight: normal;
   text-align: left;
 }
+div.dokuwiki table.diff th a {
+    font-weight: bold;
+}
+div.dokuwiki table.diff th span.user {
+    color: __text__;
+    font-size: 80%;
+}
+div.dokuwiki table.diff th span.sum {
+    font-size: 80%;
+    font-weight: bold;
+}
+div.dokuwiki table.diff th.minor {
+  font-style: italic;
+}
 div.dokuwiki table.diff td {
   font-family: monospace;
   font-size: 100%;
@@ -605,14 +632,7 @@ div.dokuwiki div.fn {
   font-size: 90%;
 }
 
-div.dokuwiki a.fn_top {
-/*  vertical-align: super; */
-  font-size: 80%;
-}
-
 div.dokuwiki a.fn_bot {
-  vertical-align: super;
-  font-size: 80%;
   font-weight: bold;
 }
 
@@ -625,6 +645,7 @@ div.insitu-footnote {
   text-align: left;
   padding: 4px;
   max-width: 40%;    /* IE's width is handled in javascript */
+  min-width: 5em;
 }
 
 /* overcome IE issue with one line code or file boxes which require h. scrolling */
@@ -674,12 +695,12 @@ div.dokuwiki ul.search_quickhits {
 
 div.dokuwiki ul.search_quickhits li {
   margin: 0 1.0em 0 1.0em;
-  float:left;
+  float: left;
   width: 30%;
 }
 
-div.dokuwiki div.section_highlight {
-  background-color: __background_alt__;
+div.dokuwiki .section_highlight {
+  background-color: __background_alt__ !important;
 }
 
 /* ------------------ Additional ---------------------- */
@@ -793,7 +814,7 @@ div.dokuwiki div.imagemeta {
 }
 
 div.dokuwiki div.imagemeta img.thumb {
-  float:left;
+  float: left;
   margin-right: 0.1em;
 }
 

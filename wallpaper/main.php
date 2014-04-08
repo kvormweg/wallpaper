@@ -74,7 +74,7 @@ require_once(dirname(__FILE__).'/tpl_functions.php');
      </div>
   </div>
   <?php } ?>
-  <?php flush()?>
+  <?php tpl_flush()?>
 
   <div class="stylefoot">
      <?php if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $ACT != 'login' && $ACT != 'logout' && $ACT != 'profile' && $ACT != 'revisions') { ?>
@@ -100,9 +100,10 @@ require_once(dirname(__FILE__).'/tpl_functions.php');
            <?php tpl_button('admin')?>
    <?php if($ACT != 'login' && $ACT != 'logout') { ?>        
            <?php tpl_button('login')?>&nbsp;
+           <?php //tplSwitcher('dokucms', 'Switch to DokuCMS template')?>
    <?php }?>
    <?php if($_SERVER['REMOTE_USER']){ ?>
-           <?php tpl_button('subscription')?>
+           <?php tpl_button('subscribe')?>
            <?php tpl_button('profile')?>
            <?php tpl_button('history')?>
    <?php }?>
