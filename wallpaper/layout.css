@@ -1,0 +1,221 @@
+/*
+ * Tableless Layout for Wallpaper template
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author moraes <moraes@tipos.com.br>
+ * @author Klaus Vormweg <klaus.vormweg@gmx.de>
+ */
+
+/* -------------- basic page elements -------------- */
+* { padding: 0; margin: 0; }
+html { font-size: 100.01%; }
+
+body {
+  font: 80% "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
+  background: url(images/__bgimg__) 0 0  no-repeat __background_other__;
+  color: __text__;
+  line-height: 1.4em;
+  text-align: left;
+}
+
+div.dokuwiki {
+  min-width: 65em;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* -------------- header --------------- */
+div.dokuwiki .stylehead {
+  background-color: transparent;
+  min-width: 65em;
+  width: 100%;
+}
+
+div.dokuwiki .header {
+  height: 7.5em;
+  background-color: transparent;
+}
+
+div.dokuwiki .pagename {
+  text-align: left;
+  padding: 3.5em 0 3.5em 0;
+  background-color: transparent;
+}
+
+div.dokuwiki .pagename a {
+  font-size: 250%;
+  font-weight: bolder;
+  color: __text_neu__ !important;
+  text-decoration: none !important;
+}
+
+div.dokuwiki div.breadcrumbs {
+  background: url(images/trans50.png) 0 0 repeat transparent;
+  border-bottom: 1px solid __border__;
+  color: __text_neu__;
+  font-size: 80%;
+  padding: 4px 0 0 4px;
+  min-height: 2em;
+  margin-top: 5em;
+}
+
+/* ---------------  bottom bar ---------------- */
+div.dokuwiki .bar {
+  float: left;
+  background-color: transparent;
+  width: 100%;
+  clear: both;
+  min-width: 60em;
+  margin-top: 1em;
+}
+
+div.dokuwiki .bar-left {
+  float: left;
+  padding: 0.1em 0;
+}
+
+div.dokuwiki .bar-right {
+  float: right;
+  text-align: right;
+  padding: 0.1em 0;
+}
+
+div.dokuwiki #bar__bottom {
+  color: __text_neu__;
+  margin-bottom: 0.5em;
+}
+
+/* ------------- File Metadata ----------------------- */
+div.dokuwiki div.stylefoot {
+  min-width: 60em;
+  width: 100%;
+  height: 1.75em;
+  clear: both;
+  color: __text__;
+  background: url(images/trans75.png) repeat 0 0 transparent;
+}
+
+div.dokuwiki div.stylefoot div.meta {
+  font-size: 85%;
+  text-align: right;
+  padding: 0.25em 1em 0.25em 0;
+  border-top: 1px solid __border__;
+}
+div.dokuwiki div.stylefoot div.meta div.homelink {
+	margin: 0 0 0 0.5em;
+	float: left;
+}
+div.dokuwiki div.stylefoot div.meta div.homelink a {
+  display: block;
+  float: left;
+  padding: 0.15em 0.25em 0.5em 1em;
+}
+
+/* ------------- the document area ------------- */
+div.dokuwiki div.wrap {
+  width: 100%;
+  overflow: hidden;
+  min-width: 60em;
+  background: url(images/trans75.png) 0 0 repeat transparent;
+}
+
+/* ------------- the  menu bar ------------- */
+div.dokuwiki div.mainmenu {
+  margin: 0;
+  padding: 0.5em;
+  width: 98.75%;
+/*  background-color: __background_alt__; */
+  background: url(images/trans85.png) 0 0 repeat transparent;
+  height: 1.5em;
+  color: __text_other__;
+}
+
+div.dokuwiki div.mainmenu ul {
+  z-index: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-weight: bold !important;}
+
+div.dokuwiki div.mainmenu ul li {
+  margin: 0 1em 0 0;
+  padding: 0;
+  float: left;
+  line-height: 1.25em;
+}
+
+div.dokuwiki div.mainmenu ul li div.li {
+  font-weight: bold !important;}
+
+div.dokuwiki div.mainmenu ul li.hover,
+div.dokuwiki div.mainmenu ul li:hover {
+  position: relative;
+  z-index: 2;
+}
+
+div.dokuwiki div.mainmenu ul ul {
+  visibility: hidden;
+  position: absolute;
+  min-width: __menuwidth__;
+  width: auto;
+  background-color: __background_alt__;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 0 0 0.25em 0;
+}
+
+div.dokuwiki div.mainmenu ul ul li {
+  float: none;
+  border-top: 1px dotted black;
+  padding: 1px 0 0 0.5em;
+  margin-right: 0 !important;
+}
+
+div.dokuwiki div.mainmenu ul ul li div.li {
+  font-weight: normal !important;}
+
+div.dokuwiki div.mainmenu ul li div.li a {
+  color: __text_alt__ !important;
+  text-decoration: none !important;
+  display: block !important;
+}
+
+div.dokuwiki div.mainmenu ul li div.li a:hover,
+div.dokuwiki div.mainmenu ul li div.li a:focus {
+  color: __text_neu__ !important;
+  background-color: __background_other__ !important;
+}
+
+div.dokuwiki div.mainmenu ul ul ul {
+  top: -1px;
+  left: 99.5%;
+}
+
+div.dokuwiki div.mainmenu ul li:hover > ul {
+  visibility: visible;
+}
+
+div.dokuwiki div.mainmenu ul li.open {
+  padding-right: 1em;
+  background-image: url(images/open.gif);
+  background-position: 100% 25%;
+  background-repeat: no-repeat;
+}
+
+div.dokuwiki div.mainmenu ul ul li.open {
+  padding-right: 1em;
+  background-image: url(images/closed.gif);
+  background-position: 98% 25%;
+  background-repeat: no-repeat;
+}
+
+/* ------------- the document ------------- */
+div.dokuwiki div.page {
+  margin-left: 1em;
+/*  max-width: auto; */
+  padding: 1.5em 1em 1.5em 1.5em;
+  background-color: transparent;
+}
