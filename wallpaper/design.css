@@ -354,11 +354,11 @@ div.dokuwiki img.mediacenter {
 }
 
 /* smileys */
-div.dokuwiki img.middle {
+div.dokuwiki img.icon {
   vertical-align: middle;
 }
 
-div.dokuwiki acronym {
+div.dokuwiki abbr {
   cursor: help;
   border-bottom: 1px dotted __text__;
 }
@@ -526,23 +526,23 @@ div.dokuwiki #dw__toc h3 {
   margin: 1em 0 2px 0;
 }
 
-div.dokuwiki #dw__toc h3 strong {
+div.dokuwiki .toggle strong {
     border: 0.4em solid transparent;
     float: right;
     display: block;
     margin: 0.4em 3px 0 0;
 }
 
-div.dokuwiki #dw__toc h3 strong span {
+div.dokuwiki .toggle span {
     display: none;
 }
 
-div.dokuwiki #dw__toc.close h3 strong {
+div.dokuwiki .toggle.closed strong {
     margin-top: 0.4em;
     border-top: 0.4em solid __text__;
 }
 
-div.dokuwiki #dw__toc.open h3 strong {
+div.dokuwiki .toggle.open strong {
     margin-top: 0;
     border-bottom: 0.4em solid __text__;
 }
@@ -611,6 +611,17 @@ div.dokuwiki table.diff th span.sum {
 div.dokuwiki table.diff th.minor {
   font-style: italic;
 }
+.dokuwiki table.diff_sidebyside th {
+    width: 50%;
+}
+.dokuwiki table.diff .diff-lineheader {
+    width: .7em;
+    text-align: right;
+}
+[dir=rtl] .dokuwiki table.diff .diff-lineheader {
+    text-align: left;
+}
+.dokuwiki table.diff .diff-lineheader,
 div.dokuwiki table.diff td {
   font-family: monospace;
   font-size: 100%;
@@ -667,12 +678,20 @@ div.insitu-footnote {
 }
 
 /* --------------- search result formating --------------- */
-div.dokuwiki .search_result {
-  margin-bottom: 6px;
+#dw__loading {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+div.dokuwiki .search_results {
   padding: 0 10px 0 30px;
 }
 
-div.dokuwiki .search_snippet {
+div.dokuwiki .search_results dt {
+  margin-bottom: 3px;
+}
+div.dokuwiki .search_results dd {
+  margin-bottom: 6px;
   color: __text_other__;
   font-size: 12px;
   margin-left: 20px;
