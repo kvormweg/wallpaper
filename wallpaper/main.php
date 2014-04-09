@@ -48,7 +48,7 @@ echo '      </div>
 	   <div class="mainmenu">
 ';
 
-_tpl_mainmenu();
+_wp_tpl_mainmenu();
 echo '      </div>
     </div>
     <div class="breadcrumbs">
@@ -56,10 +56,10 @@ echo '      </div>
 if($conf['breadcrumbs']){
   tpl_breadcrumbs();
 } elseif($conf['youarehere']){
-  tpl_youarehere();
+  _wp_tpl_youarehere();
 }
-// $translation = &plugin_load('helper','translation');
-// if ($translation) echo $translation->showTranslations();
+//$translation = &plugin_load('helper','translation');
+//if ($translation) echo $translation->showTranslations();
 echo '    </div>
   </div>
 ';
@@ -91,7 +91,7 @@ if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $
    	 <a href="', DOKU_BASE, 'feed.php" title="Recent changes RSS feed"><img src="', DOKU_TPL, 'images/button-rss.png" width="80" height="15" alt="Recent changes RSS feed" /></a>
     </div>
 ';
-  _tpl_pageinfo();
+  _wp_tpl_pageinfo();
   echo '  </div>
 ';
 } else {
@@ -137,6 +137,16 @@ if(!$_SERVER['REMOTE_USER'] && $ACT != 'login' && $ACT != 'logout'){
   }
 }
 tpl_button('edit');
+$dw2pdf = &plugin_load('action','dw2pdf');
+if($dw2pdf) {
+	global $REV;
+	echo '<form class="button" method="get" action="',wl($ID),'">
+              <div class="no"><input type="hidden" name="do" value="export_pdf" />
+              <input type="hidden" name="rev" value="', $REV, '" />
+              <input type="hidden" name="id" value="', $ID, '" />
+              <input type="submit" value="PDF-Export" class="button" title="PDF-Export" />
+              </div></form>';
+}
 echo '    </div>
       <div class="clearer"></div>
     </div>

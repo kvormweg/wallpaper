@@ -12,7 +12,7 @@
 if (!defined('DOKU_INC')) die();
 
 /* prints the menu */
-function _tpl_mainmenu() {
+function _wp_tpl_mainmenu() {
   require_once(DOKU_INC.'inc/search.php');
   global $conf;
   global $ID;
@@ -51,7 +51,7 @@ function _tpl_mainmenu() {
 		if(!file_exists($filepath)) {
 			$ff = FALSE;
 		} else {
-  		_tpl_parsemenufile($data, $menufilename, $start);
+  		_wp_tpl_parsemenufile($data, $menufilename, $start);
 		} 
   } 
   if(!$conf['tpl'][$tpl]['usemenufile'] or ($conf['tpl'][$tpl]['usemenufile'] and !$ff)) {
@@ -112,13 +112,13 @@ function _tpl_mainmenu() {
     }
     $data2[] = $item;
   }  
-  echo html_buildlist($data2,'idx','_tpl_list_index','html_li_index');
+  echo html_buildlist($data2,'idx','_wp_tpl_list_index','html_li_index');
 }
 
 /* Index item formatter
- * User function for html_buildlist()
+ * Callback function for html_buildlist()
 */
-function _tpl_list_index($item){
+function _wp_tpl_list_index($item){
   global $ID;
   global $conf;
   $ret = '';
@@ -134,7 +134,7 @@ function _tpl_list_index($item){
   return $ret;
 }
 
-function _tpl_parsemenufile(&$data, $filename, $start) {
+function _wp_tpl_parsemenufile(&$data, $filename, $start) {
   $ret = TRUE;
 	$filepath = wikiFN($filename);
 	if(file_exists($filepath)) {
@@ -208,7 +208,7 @@ function _tpl_parsemenufile(&$data, $filename, $start) {
 }
 
 # wallpaper modified version of pageinfo 
-function _tpl_pageinfo(){
+function _wp_tpl_pageinfo(){
   global $conf;
   global $lang;
   global $INFO;
@@ -239,5 +239,58 @@ function _tpl_pageinfo(){
     return true;
   }
   return false;
+}
+/*/**
+ * Hierarchical breadcrumbs
+ *
+ * This code was suggested as replacement for the usual breadcrumbs.
+ * It only makes sense with a deep site structure.
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Nigel McNie <oracle.shinoda@gmail.com>
+ * @author Sean Coates <sean@caedmon.net>
+ * @author <fredrik@averpil.com>
+ * @todo   May behave strangely in RTL languages
+ * @param string $sep Separator between entries
+ * @return bool
+ */
+function _wp_tpl_youarehere($sep = ' » ') {
+    global $conf;
+    global $ID;
+    global $lang;
+
+		$lspace = $_SESSION[DOKU_COOKIE]['translationlc'];
+
+    // check if enabled
+    if(!$conf['youarehere']) return false;
+
+    $parts = explode(':', $ID);
+    $count = count($parts);
+
+    echo '<span class="bchead">'.$lang['youarehere'].': </span>';
+
+    // always print the startpage
+    if(!$lspace) tpl_pagelink(':'.$conf['start']);
+
+    // print intermediate namespace links
+    $part = '';
+    for($i = 0; $i < $count - 1; $i++) {
+        $part .= $parts[$i].':';
+        $page = $part;
+        if($page == $conf['start']) continue; // Skip startpage
+
+        // output
+        echo $sep;
+        tpl_pagelink($page);
+    }
+
+    // print current page, skipping start page, skipping for namespace index
+    resolve_pageid('', $page, $exists);
+    if(isset($page) && $page == $part.$parts[$i]) return true;
+    $page = $part.$parts[$i];
+    if($page == $conf['start']) return true;
+    echo $sep;
+    tpl_pagelink($page);
+    return true;
 }
 ?>

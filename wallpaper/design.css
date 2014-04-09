@@ -897,3 +897,6 @@ div.comment_buttons {
 .plugin_translation span {
   display: none;
 }
+div.plugin_translation {
+  margin-bottom: 0 !important;
+}

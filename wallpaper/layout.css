@@ -70,7 +70,7 @@ div.dokuwiki div.breadcrumbs {
   color: __text_neu__;
   font-size: 80%;
   padding: 4px 0 0 4px;
-  min-height: 2em;
+  min-height: 2.5em;
   margin-top: 5em;
 }
 
@@ -232,7 +232,7 @@ div.dokuwiki div.mainmenu ul ul li.open {
 /* ------------- the document ------------- */
 div.dokuwiki div.page {
   margin-left: 1em;
-/*  max-width: auto; */
+  /* width: 780px; */
   padding: 1.5em 1em 1.5em 1.5em;
   background-color: transparent;
   height: 100%;
