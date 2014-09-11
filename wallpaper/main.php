@@ -118,19 +118,16 @@ echo '&nbsp;
        </div>
        <div class="bar-right" id="bar__bottomright">
 ';
-if(!$_SERVER['REMOTE_USER'] && $ACT != 'login' && $ACT != 'logout'){ 
-  if(!$conf['tpl']['wallpaper']['showsearch']) {  
+if($ACT != 'login' && $ACT != 'logout') {
+  if($conf['tpl']['wallpaper']['showsearch']) {  
     tpl_searchform();
+    echo '&nbsp';
   }
-  if($conf['tpl']['wallpaper']['showmedia']) {   
-    tpl_button('media');
-  }
-} else {
-  if($ACT != 'login' && $ACT != 'logout'){
-    if($conf['tpl']['wallpaper']['showsearch']) {  
-      tpl_searchform();
-      echo '&nbsp';
+  if(!$_SERVER['REMOTE_USER']){ 
+    if($conf['tpl']['wallpaper']['showmedia']) {   
+      tpl_button('media');
     }
+  } else {
     tpl_button('media');
   }
 }
@@ -139,15 +136,15 @@ $dw2pdf = &plugin_load('action','dw2pdf');
 if($dw2pdf) {
 	global $REV;
 	echo '<form class="button" method="get" action="',wl($ID),'">
-              <div class="no"><input type="hidden" name="do" value="export_pdf" />
-              <input type="hidden" name="rev" value="', $REV, '" />
-              <input type="hidden" name="id" value="', $ID, '" />
-              <input type="submit" value="PDF-Export" class="button" title="PDF-Export" />
-              </div></form>';
+          <div class="no"><input type="hidden" name="do" value="export_pdf" />
+          <input type="hidden" name="rev" value="', $REV, '" />
+          <input type="hidden" name="id" value="', $ID, '" />
+          <input type="submit" value="PDF-Export" class="button" title="PDF-Export" />
+          </div></form>';
 }
-echo '    </div>
-      <div class="clearer"></div>
-    </div>
+echo '  </div>
+  <div class="clearer"></div>
+  </div>
   </div>
   <div class="no">
 ';

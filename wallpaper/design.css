@@ -33,10 +33,9 @@ img#fakebackground {
 	z-index: -1;
 }
 div.dokuwiki {
-  min-width: 65em;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+  min-width: 70em;
+  width: 85%;
+  margin: 0 auto;
 }
 
 /* -------------- header --------------- */
@@ -65,7 +64,7 @@ div.dokuwiki .pagename a {
 }
 
 div.dokuwiki div.breadcrumbs {
-  background: url(images/trans50.png) 0 0 repeat transparent;
+  background-color: rgba(255,255,255,0.6);
   border-bottom: 1px solid __border__;
   color: __text_neu__;
   font-size: 80%;
@@ -107,7 +106,7 @@ div.dokuwiki div.stylefoot {
   height: 1.75em;
   clear: both;
   color: __text__;
-  background: url(images/trans75.png) repeat 0 0 transparent;
+  background-color: rgba(255,255,255,0.75);
 }
 
 div.dokuwiki div.stylefoot div.meta {
@@ -131,7 +130,7 @@ div.dokuwiki div.wrap {
   width: 100%;
   overflow: hidden;
   min-width: 60em;
-  background: url(images/trans75.png) 0 0 repeat transparent;
+  background-color: rgba(255,255,255,0.8) ;
 }
 
 /* ------------- the  menu bar ------------- */
@@ -139,8 +138,7 @@ div.dokuwiki div.mainmenu {
   margin: 0;
   padding: 0.5em;
   width: 98.75%;
-/*  background-color: __background_alt__; */
-  background: url(images/trans85.png) 0 0 repeat transparent;
+  background-color: rgba(255,255,255,0.9 );
   height: 1.5em;
   color: __text_other__;
 }
@@ -170,7 +168,6 @@ div.dokuwiki div.mainmenu ul li:hover {
 }
 
 div.dokuwiki div.mainmenu ul ul {
-  visibility: hidden;
   display: none;
   position: absolute;
   min-width: __menuwidth__;
@@ -211,7 +208,6 @@ div.dokuwiki div.mainmenu ul ul ul {
 }
 
 div.dokuwiki div.mainmenu ul li:hover > ul {
-  visibility: visible;
   display: inline;
 }
 
@@ -758,7 +754,7 @@ div.dokuwiki #dw__toc {
 
 div.dokuwiki #dw__toc h3 {
   border: 1px solid __border__;
-  background: url(images/trans75.png) 0 0 repeat transparent;
+  background-color: rgba(255,255,255,0.75);
   text-align: left;
   font-weight: bold;
   padding: 3px;
@@ -788,7 +784,7 @@ div.dokuwiki .toggle.open strong {
 
 div.dokuwiki #dw__toc > div {
   border: 1px solid __border__;
-  background: url(images/trans.png) 0 0 repeat transparent;
+  background-color: rgba(255,255,255,0.6);
   text-align: left;
   padding: 0.5em 0 0.7em 0;
 }
