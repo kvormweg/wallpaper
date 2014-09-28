@@ -161,21 +161,14 @@ div.dokuwiki div.mainmenu ul li {
 div.dokuwiki div.mainmenu ul li div.li {
   font-weight: bold !important;}
 
-div.dokuwiki div.mainmenu ul li.hover,
-div.dokuwiki div.mainmenu ul li:hover {
-  position: relative;
-  z-index: 2;
-}
-
 div.dokuwiki div.mainmenu ul ul {
-  display: none;
   position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.75s, opacity 0.75s linear;
   min-width: __menuwidth__;
   width: auto;
   background-color: __background_alt__;
-  top: 100%;
-  left: 0;
-  z-index: 1;
   margin: 0;
   padding: 0 0 0.25em 0;
 }
@@ -183,7 +176,7 @@ div.dokuwiki div.mainmenu ul ul {
 div.dokuwiki div.mainmenu ul ul li {
   float: none;
   border-top: 1px dotted black;
-  padding: 1px 0 0 0.5em;
+  padding: 1px 0.5em 0 0.5em;
   margin-right: 0 !important;
 }
 
@@ -208,7 +201,9 @@ div.dokuwiki div.mainmenu ul ul ul {
 }
 
 div.dokuwiki div.mainmenu ul li:hover > ul {
-  display: inline;
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
 }
 
 div.dokuwiki div.mainmenu ul li.open {
