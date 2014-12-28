@@ -92,19 +92,19 @@ function _wp_tpl_mainmenu() {
     if($conf['tpl'][$tpl]['hiderootlinks']) {
 			$item2 = array();
     	if($item['type'] == 'f' and !$item['ns'] and $item['id']) {
-    		if($first) {
-			  	$item2['id'] ='start';
-          $item2['ns'] = 'root';
-          $item2['perm'] = 8;
-          $item2['type'] = 'd';
-          $item2['level'] = 1;
-          $item2['open'] = 1;
-          $item2['title'] = 'Start';
-		     	$data2[] = $item2;
-		      $first = false;
-        }
-    		$item['ns'] = 'root';
-    		$item['level'] = 2;
+    	  if($first) {
+	    $item2['id'] = $conf['start'];
+            $item2['ns'] = 'root';
+            $item2['perm'] = 8;
+            $item2['type'] = 'd';
+            $item2['level'] = 1;
+            $item2['open'] = 1;
+            $item2['title'] = $item['title'];
+	    $data2[] = $item2;
+            $first = false;
+          }
+    	  $item['ns'] = 'root';
+    	  $item['level'] = 2;
     	}	
     }
     if($item['id'] == $start or preg_match('/:'.$start.'$/',$item['id'])) {

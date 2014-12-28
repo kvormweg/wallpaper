@@ -21,7 +21,7 @@ echo '<!DOCTYPE html>
   <title>
 ';
 tpl_pagetitle();
-echo '[', strip_tags($conf['title']), ']';
+echo ' [', strip_tags($conf['title']), ']';
 echo '</title>
 ';
 
