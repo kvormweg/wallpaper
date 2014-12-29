@@ -17,6 +17,8 @@ The CSS-code used in the dropdown menu was inspired by http://www.lwis.net/free-
 
 The resizable fake background image was inspired by Chris Coyier (http://css-tricks.com/how-to-resizeable-background-image/)
 
+Menu animation inspired by Brian Huisman (http://www.greywyvern.com/?post=337)
+
 ## Installation
 
 Unpack the file somewhere. Move the directory named `wallpaper` into the `/lib/tpl` directory of your Dokuwiki installation.
