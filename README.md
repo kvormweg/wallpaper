@@ -47,6 +47,7 @@ Further configuration can be done via the configuration dialog in the admin func
 * show backlink button: will show a backlink button in the bottom bar (default: off).
 * show search box if logged in: will show a search box, if you are logged in (default: off).
 * create a submenu for pages in the root namespace: this option will put all pages in the top level namespace into a sub menu instead of listing each in the topmost menu level (default: off).
+* submenu entry for the root namespace: menu entry text for the top level namepsace (default: "Start").
 * the menu is based on a user-supplied file: this option will switch off the automatically generated menu and look for a menu file (the name can be configured in the next option) for the menu. For syntax of this file see below. (default: off).
 * menu file name: configure the file name for the menu file (without .txt extension) (default: menu).
 
