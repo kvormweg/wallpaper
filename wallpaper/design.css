@@ -137,7 +137,6 @@ div.dokuwiki div.wrap {
 div.dokuwiki div.mainmenu {
   margin: 0;
   padding: 0.5em;
-  width: 98.75%;
   background-color: rgba(255,255,255,0.9 );
   height: 1.5em;
   color: __text_other__;
@@ -676,17 +675,17 @@ div.dokuwiki pre {
 
 /* code blocks by indention */
 div.dokuwiki pre.pre {
-  background: url(images/trans50.png) repeat 0 0 transparent;
+  background-color: rgba(255,255,255,0.5);
 }
 
 /* code blocks by code tag */
 div.dokuwiki pre.code {
-  background: url(images/trans50.png) repeat 0 0 transparent;
+  background-color: rgba(255,255,255,0.5);
 }
 
 /* code blocks by file tag */
 div.dokuwiki pre.file {
-  background: url(images/trans50.png) repeat 0 0 transparent;
+  background-color: rgba(255,255,255,0.5);
 }
 
 /* filenames for file and code blocks */
@@ -715,7 +714,7 @@ div.dokuwiki dl.code dt {
 }
 
 div.dokuwiki dl.file dt {
-  background: url(images/trans50.png) repeat 0 0 __background_neu__;
+  background-color: rgba(255,255,255,0.5);
   border-bottom: 1px solid __background_neu__;
 }
 
@@ -1084,10 +1083,6 @@ div.dokuwiki div.imagemeta img.thumb {
 /* other */
 th, .tocheader  {
   color: __existing__;
-}
-
-pre.file {
-  background-color: __background_neu__ !important;
 }
 
 legend  {
