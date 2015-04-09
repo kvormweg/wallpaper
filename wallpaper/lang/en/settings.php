@@ -14,4 +14,5 @@ $lang['hiderootlinks'] = 'create a submenu for pages in the root namespace';
 $lang['rootmenutext'] = 'submenu entry for root namespace';
 $lang['usemenufile'] = 'the menu is based on a user-supplied file';
 $lang['menufilename'] = 'menu file name';
+$lang['fixedbackground'] = 'fixed background image';
 ?>

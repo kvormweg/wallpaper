@@ -14,4 +14,5 @@ $lang['hiderootlinks'] = 'Ein Untermenü für Seiten des Wurzel-Namensraums erze
 $lang['rootmenutext'] = 'Name des Menüeintrags für den Wurzel-Namensraums';
 $lang['usemenufile'] = 'Eine eigene Menüstruktur in einer Datei bereitstellen';
 $lang['menufilename'] = 'Dateiname für das Menü';
+$lang['fixedbackground'] = 'Fest stehendes Hintergrundbild';
 ?>

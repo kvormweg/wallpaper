@@ -18,39 +18,41 @@ echo '<!DOCTYPE html>
  lang="', $conf['lang'],'" dir="', $lang['direction'], '">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <title>
-';
+  <title>',"\n";
 tpl_pagetitle();
 echo ' [', strip_tags($conf['title']), ']';
-echo '</title>
-';
+echo '</title>',"\n";
 
 tpl_metaheaders();
 echo tpl_favicon(array('favicon', 'mobile'));
+if($conf['tpl']['wallpaper']['fixedbackground']) {   
+  echo '  <style type="text/css">
+    img#fakebackground {
+	    position: fixed;
+    }  
+  </style>',"\n";
+}
 
 echo '  </head>
 
 <body>
 <div class="dokuwiki">
-   <img id="fakebackground" src="', DOKU_TPL, 'images/bg.jpg" alt="" />
-';
+   <img id="fakebackground" src="', DOKU_TPL, 'images/bg.jpg" alt="" />',"\n";
 html_msgarea();
 echo '  <div class="stylehead">
     <div class="header">
-      <div class="pagename">';
+      <div class="pagename">',"\n";
       
 tpl_link(wl(),$conf['title'],'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"');
 echo '      </div>
 
      <div class="clearer"></div>
-	   <div class="mainmenu">
-';
+	   <div class="mainmenu">',"\n";
 
 _wp_tpl_mainmenu();
 echo '      </div>
     </div>
-    <div class="breadcrumbs">
-';
+    <div class="breadcrumbs">',"\n";
 if($conf['breadcrumbs']){
   tpl_breadcrumbs();
 } elseif($conf['youarehere']){
@@ -59,51 +61,42 @@ if($conf['breadcrumbs']){
 //$translation = &plugin_load('helper','translation');
 //if ($translation) echo $translation->showTranslations();
 echo '    </div>
-  </div>
-';
+  </div>',"\n";
 flush();
 if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $ACT != 'login' && $ACT != 'logout' && $ACT != 'profile' && $ACT != 'revisions') {
   echo '  <div class="wrap">
-     <div class="page">
-';
+     <div class="page">',"\n";
   tpl_content();
   echo '
      </div>
-  </div>';
+  </div>',"\n";
 } else {
   echo '  <div class="wrap">
-     <div class="page" style="margin-left:0; max-width: 78em;">
-';
+     <div class="page" style="margin-left:0; max-width: 78em;">',"\n";
   tpl_content();
   echo '   </div>
-  </div>
-';
+  </div>',"\n";
 }
 tpl_flush();
-echo '  <div class="stylefoot">
-';
+echo '  <div class="stylefoot">',"\n";
 if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $ACT != 'login' && $ACT != 'logout' && $ACT != 'profile' && $ACT != 'revisions') {
   echo '    <div class="meta">
      <div class="homelink">
   		   <a href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="', DOKU_TPL, 'images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" /></a>
    	 <a href="', DOKU_BASE, 'feed.php" title="Recent changes RSS feed"><img src="', DOKU_TPL, 'images/button-rss.png" width="80" height="15" alt="Recent changes RSS feed" /></a>
-    </div>
-';
+    </div>',"\n";
   _wp_tpl_pageinfo();
-  echo '  </div>
-';
+  echo '  </div>',"\n";
 } else {
   echo '  <div class="meta">
      <div class="homelink">
   		   <a href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="', DOKU_TPL, 'images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" /></a>
     	 <a href="', DOKU_BASE, 'feed.php" title="Recent changes RSS feed"><img src="', DOKU_TPL, 'images/button-rss.png" width="80" height="15" alt="Recent changes RSS feed" /></a>
       </div>
-    </div>
-';
+    </div>',"\n";
 }
 echo '    <div class="bar" id="bar__bottom">
-       <div class="bar-left" id="bar__bottomleft">
-';
+       <div class="bar-left" id="bar__bottomleft">',"\n";
 tpl_button('admin');
 if($ACT != 'login' && $ACT != 'logout') {        
   tpl_button('login');
@@ -116,8 +109,7 @@ if($_SERVER['REMOTE_USER']){
 }
 echo '&nbsp;
        </div>
-       <div class="bar-right" id="bar__bottomright">
-';
+       <div class="bar-right" id="bar__bottomright">',"\n";
 if($ACT != 'login' && $ACT != 'logout') {
   if($conf['tpl']['wallpaper']['showsearch']) {  
     tpl_searchform();
@@ -140,19 +132,17 @@ if($dw2pdf) {
           <input type="hidden" name="rev" value="', $REV, '" />
           <input type="hidden" name="id" value="', $ID, '" />
           <input type="submit" value="PDF-Export" class="button" title="PDF-Export" />
-          </div></form>';
+          </div></form>',"\n";
 }
 echo '  </div>
   <div class="clearer"></div>
   </div>
   </div>
-  <div class="no">
-';
+  <div class="no">';
 /* provide DokuWiki housekeeping, required in all templates */ 
 tpl_indexerWebBug();
 echo '</div>
 </div>
 </body>
-</html>
-';
+</html>',"\n";
 ?>

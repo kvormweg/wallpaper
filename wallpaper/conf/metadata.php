@@ -15,4 +15,5 @@ $meta['hiderootlinks'] = array('onoff');
 $meta['rootmenutext'] = array('string');
 $meta['usemenufile'] = array('onoff');
 $meta['menufilename'] = array('string');
+$meta['fixedbackground'] = array('onoff');
 ?>

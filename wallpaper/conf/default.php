@@ -15,4 +15,5 @@ $conf['tpl']['wallpaper']['hiderootlinks'] = 0;  // 1 or 0
 $conf['tpl']['wallpaper']['rootmenutext'] = 'Home';  // string
 $conf['tpl']['wallpaper']['usemenufile'] = 0;  // 1 or 0
 $conf['tpl']['wallpaper']['menufilename'] = 'menu';  // string
+$conf['tpl']['wallpaper']['fixedbackground'] = 0;  // 1 or 0
 ?>
