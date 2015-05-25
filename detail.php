@@ -16,12 +16,12 @@ echo '<!DOCTYPE html>
 <html lang="', $conf['lang'], '" dir="ltr">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>' hsc(tpl_img_getTag('IPTC.Headline',$IMG)), ' [', strip_tags($conf['title']), ']</title>
+  <title>', hsc(tpl_img_getTag('IPTC.Headline',$IMG)), ' [', strip_tags($conf['title']), ']</title>
 ';
 tpl_metaheaders();
 echo '  <link rel="shortcut icon" href="', DOKU_TPL, 'images/favicon.ico" />
 </head>
-<body>
+<body style="background-color: #fff">
 <div class="dokuwiki">
 ';
 html_msgarea();
@@ -77,5 +77,5 @@ echo '  </div>
 </div>
 </body>
 </html>
-?>
 ';
+?>
