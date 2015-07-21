@@ -7,13 +7,13 @@
  */
 
 /* -------------- basic page elements -------------- */
-* { 
-  padding: 0; margin: 0; 
+* {
+  padding: 0; margin: 0;
 }
 
-html { 
+html {
   font-size: 100%;
-  height: 0; 
+  height: 0;
 }
 
 body {
@@ -26,7 +26,7 @@ body {
   width: 100%;
 }
 img#fakebackground {
-  width: 100%;	
+  width: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -143,6 +143,10 @@ div.dokuwiki div.mainmenu {
   color: __text_other__;
 }
 
+div.dokuwiki div.mainmenu a#hamburger {
+  display: none;
+}
+
 div.dokuwiki div.mainmenu ul {
   z-index: 0;
   list-style-type: none;
@@ -227,7 +231,7 @@ div.dokuwiki div.mainmenu ul ul li.open {
 div.dokuwiki div.page {
   margin-left: 1em;
   /* width: 780px; */
-  padding: 1.5em 1em 1.5em 1.5em;
+  padding: 1.5em 1em 1.5em 0.5em;
   background-color: transparent;
   height: 100%;
 }
@@ -566,6 +570,8 @@ div.dokuwiki li.minor {
 /* embedded images */
 div.dokuwiki img.media {
   margin: 3px;
+  max-width: 100%;
+  height: auto;
 }
 
 div.dokuwiki img.medialeft {
@@ -1128,4 +1134,70 @@ div.comment_buttons {
 }
 div.plugin_translation {
   margin-bottom: 0 !important;
+}
+
+/* reponsiveness */
+@media (max-width: 899px) {
+  div#dw__toc, div.plugin_loadskin, div.mainmenu ul {
+    display: none;
+  }
+
+  div.dokuwiki, div.dokuwiki .stylehead, div.dokuwiki .bar,
+  div.dokuwiki div.stylefoot, div.dokuwiki div.wrap {
+    min-width: 0;
+  }
+
+  div.dokuwiki {
+    width: 100%;
+  }
+
+  div.dokuwiki .pagename {
+    padding-left: 0.5em;
+  }
+
+  div.dokuwiki div.mainmenu a#hamburger {
+    font-size: 150%;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline;
+  }
+
+  div.dokuwiki div.mainmenu ul {
+    position: relative;
+    background-color: #fff;
+    padding: 1em;
+    width: auto;
+    max-width: 25em;
+    z-index: 99;
+  }
+
+  div.dokuwiki div.mainmenu ul li {
+    visibility: visible;
+    margin: 0 1em 0 0;
+    float: none;
+    padding: 0.25em 0;
+  }
+
+  div.dokuwiki div.mainmenu ul ul {
+    position: static;
+    visibility: visible;
+    transition: none;
+    padding: 0 0 0.25em 0;
+    opacity: 1;
+  }
+
+  div.dokuwiki div.mainmenu ul ul li {
+    padding: 0.25em 0;
+  }
+
+  div.dokuwiki div.mainmenu ul ul ul {
+    visibility: visible;
+    top: 0;
+    left: 0;
+  }
+
+  div.dokuwiki div.mainmenu ul li.open, div.dokuwiki div.mainmenu ul ul li.open {
+    padding-right: 0;
+    background-image: none;
+  }
 }

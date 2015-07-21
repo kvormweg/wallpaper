@@ -223,9 +223,7 @@ function _wp_tpl_pageinfo(){
 
   // echo it
   if($INFO['exists']) {
-    echo $lang['lastmod'];
-    echo ': ';
-    echo $date;
+    echo $lang['lastmod'], ' ', $date;
     if($_SERVER['REMOTE_USER']) {
       if($INFO['editor']) {
         echo ' ',$lang['by'],' ', $INFO['editor'];
@@ -239,6 +237,29 @@ function _wp_tpl_pageinfo(){
     return true;
   }
   return false;
+}
+
+function _wp_tpl_bgimage() {
+/*
+ * Search for individual background images for pages or namespace
+ */
+
+  global $ID;
+  $nsarr = explode(':',$ID);
+  $i = count($nsarr);
+  for($j = $i; $j > 0; $j--) {
+    $ptarr = array_slice($nsarr, 0, $j);
+    if($j == $i) {
+      $sep = '';
+    } else {
+      $sep = '/'.$nsarr[($j-1)];
+    }
+    $pn = 'data/media/'.implode('/',$ptarr).$sep.'_bg.jpg';
+    if(file_exists(DOKU_INC.$pn)) {
+      return DOKU_URL.$pn;
+    }
+  }
+  return DOKU_TPL.'images/bg.jpg';
 }
 /*/**
  * Hierarchical breadcrumbs
@@ -267,7 +288,7 @@ function _wp_tpl_youarehere($sep = ' » ') {
   $parts = explode(':', $ID);
   $count = count($parts);
 
-  echo '<span class="bchead">'.$lang['youarehere'].': </span>';
+  echo '<span class="bchead">',$lang['youarehere'],' </span>';
 
   // always print the startpage
   if(!$lspace) tpl_pagelink(':'.$conf['start']);

@@ -14,22 +14,21 @@ if (!defined('DOKU_INC')) die();
 require_once(dirname(__FILE__).'/tpl_functions.php');
 
 echo '<!DOCTYPE html>
-<html ', $conf['lang'], '"
- lang="', $conf['lang'],'" dir="', $lang['direction'], '">
+<html lang="', $conf['lang'],'" dir="', $lang['direction'], '">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>',"\n";
 tpl_pagetitle();
 echo ' [', strip_tags($conf['title']), ']';
-echo '</title>',"\n";
-
+echo '  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">',"\n";
 tpl_metaheaders();
 echo tpl_favicon(array('favicon', 'mobile'));
-if($conf['tpl']['wallpaper']['fixedbackground']) {   
+if($conf['tpl']['wallpaper']['fixedbackground']) {
   echo '  <style type="text/css">
     img#fakebackground {
 	    position: fixed;
-    }  
+    }
   </style>',"\n";
 }
 
@@ -37,18 +36,18 @@ echo '  </head>
 
 <body>
 <div class="dokuwiki">
-   <img id="fakebackground" src="', DOKU_TPL, 'images/bg.jpg" alt="" />',"\n";
+   <img id="fakebackground" src="', _wp_tpl_bgimage(), '" alt="" />',"\n";
 html_msgarea();
 echo '  <div class="stylehead">
     <div class="header">
       <div class="pagename">',"\n";
-      
+
 tpl_link(wl(),$conf['title'],'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"');
 echo '      </div>
 
      <div class="clearer"></div>
-	   <div class="mainmenu">',"\n";
-
+	   <div class="mainmenu">
+	   <a id="hamburger" href="#">&#9776;</a>',"\n";
 _wp_tpl_mainmenu();
 echo '      </div>
     </div>
@@ -98,7 +97,7 @@ if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $
 echo '    <div class="bar" id="bar__bottom">
        <div class="bar-left" id="bar__bottomleft">',"\n";
 tpl_button('admin');
-if($ACT != 'login' && $ACT != 'logout') {        
+if($ACT != 'login' && $ACT != 'logout') {
   tpl_button('login');
   echo '&nbsp;';
 }
@@ -111,12 +110,12 @@ echo '&nbsp;
        </div>
        <div class="bar-right" id="bar__bottomright">',"\n";
 if($ACT != 'login' && $ACT != 'logout') {
-  if($conf['tpl']['wallpaper']['showsearch']) {  
+  if($conf['tpl']['wallpaper']['showsearch']) {
     tpl_searchform();
     echo '&nbsp';
   }
-  if(!$_SERVER['REMOTE_USER']){ 
-    if($conf['tpl']['wallpaper']['showmedia']) {   
+  if(!$_SERVER['REMOTE_USER']){
+    if($conf['tpl']['wallpaper']['showmedia']) {
       tpl_button('media');
     }
   } else {
@@ -139,7 +138,7 @@ echo '  </div>
   </div>
   </div>
   <div class="no">';
-/* provide DokuWiki housekeeping, required in all templates */ 
+/* provide DokuWiki housekeeping, required in all templates */
 tpl_indexerWebBug();
 echo '</div>
 </div>

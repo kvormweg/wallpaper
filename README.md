@@ -21,9 +21,9 @@ Menu animation inspired by Brian Huisman (http://www.greywyvern.com/?post=337)
 
 ## Installation
 
-Unpack the file somewhere. Move the directory named `wallpaper` into the `/lib/tpl` directory of your Dokuwiki installation.
+Unpack the file into the `/lib/tpl` directory of your Dokuwiki installation. It will create a directory named `wallpaper`. You can also use the bundled plugin installer.
 
-In the configuration plugin chose wallpaper as your template.
+In the configuration plugin chose `wallpaper` as your template.
 
 ## Configuration
 
@@ -81,6 +81,8 @@ The background image can be changed if you drop a JPG-image named `bg.jpg` into 
 
 The background image should be at least as wide as the biggest possible window width. The image should have a color gradient fading into black in the bottom.
 
+The background for namespaces and/or individual pages may be changed by uploading JPG images. Picture files have to be named `(page name)_bg.jpg` or `(namespace name)_bg.jpg`. Replace `(page name)` or `(namespace name)` by the page name or namespace name the way it is converted by Dokuwiki (see the page URL). If you use namespaces background pictures must be uploaded into the corresponding folder for the namespace.
+
 ## Browser compatibility
 
-This template works well with current Firefox and Google-Chrome. I have not tested other browsers yet. As this template uses PNG transparency it should look awful in Internet Explorer 6.
+This template should work well with all recent browsers that support HTML5 and CSS3.
