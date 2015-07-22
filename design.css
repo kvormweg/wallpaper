@@ -143,10 +143,6 @@ div.dokuwiki div.mainmenu {
   color: __text_other__;
 }
 
-div.dokuwiki div.mainmenu a#hamburger {
-  display: none;
-}
-
 div.dokuwiki div.mainmenu ul {
   z-index: 0;
   list-style-type: none;
@@ -171,7 +167,7 @@ div.dokuwiki div.mainmenu ul ul {
   position: absolute;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s linear 0.75s, opacity 0.75s linear;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
   min-width: __menuwidth__;
   width: auto;
   background-color: __background_alt__;
@@ -1094,7 +1090,6 @@ div.dokuwiki div.imagemeta img.thumb {
 th, .tocheader  {
   color: __existing__;
 }
-
 legend  {
   color: __text_alt__ !important;
   font-weight: bold;
@@ -1135,8 +1130,21 @@ div.comment_buttons {
 div.plugin_translation {
   margin-bottom: 0 !important;
 }
+/* a11y */
+.vishelp {
+  display: none;
+}
 
 /* reponsiveness */
+/* hamburger */
+input#hamburger {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+label[for="hamburger"] {
+  display: none;
+}
+
 @media (max-width: 899px) {
   div#dw__toc, div.plugin_loadskin, div.mainmenu ul {
     display: none;
@@ -1155,20 +1163,22 @@ div.plugin_translation {
     padding-left: 0.5em;
   }
 
-  div.dokuwiki div.mainmenu a#hamburger {
+  label[for="hamburger"] {
+    cursor: pointer;
     font-size: 150%;
-    font-weight: bold;
-    text-decoration: none;
     display: inline;
+    color: #000;
   }
-
-  div.dokuwiki div.mainmenu ul {
+  #hamburger:checked ~ ul {
+    display: block;
     position: relative;
+    left: 2em;
     background-color: #fff;
     padding: 1em;
     width: auto;
-    max-width: 25em;
-    z-index: 99;
+    max-width: 20.5em;
+    visibility: visible;
+    opacity: 1;
   }
 
   div.dokuwiki div.mainmenu ul li {
@@ -1179,9 +1189,9 @@ div.plugin_translation {
   }
 
   div.dokuwiki div.mainmenu ul ul {
+    display: block;
     position: static;
     visibility: visible;
-    transition: none;
     padding: 0 0 0.25em 0;
     opacity: 1;
   }
@@ -1191,13 +1201,17 @@ div.plugin_translation {
   }
 
   div.dokuwiki div.mainmenu ul ul ul {
+    display: block;
     visibility: visible;
-    top: 0;
-    left: 0;
   }
 
   div.dokuwiki div.mainmenu ul li.open, div.dokuwiki div.mainmenu ul ul li.open {
     padding-right: 0;
     background-image: none;
+  }
+}
+@media (max-width: 379px) {
+  .resp {
+    display: none;
   }
 }
