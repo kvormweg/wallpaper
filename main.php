@@ -42,12 +42,13 @@ echo '  <div class="stylehead">
     <div class="header">
       <div class="pagename">',"\n";
 
-tpl_link(wl(),$conf['title'],'name="dokuwiki__top" id="dokuwiki__top" accesskey="h" title="[ALT+H]"');
+tpl_link(wl(),$conf['title'],' id="dokuwiki__top" accesskey="h" title="[ALT+H]"');
 echo '      </div>
 
      <div class="clearer"></div>
 	   <div class="mainmenu">
-	   <a id="hamburger" href="#">&#9776;</a>',"\n";
+     <input type="checkbox" id="hamburger" class="hamburger" />
+     <label for="hamburger" class="hamburger" title="Menu">&#9776; <span class="vishelp">Menu</span></label>',"\n";
 _wp_tpl_mainmenu();
 echo '      </div>
     </div>

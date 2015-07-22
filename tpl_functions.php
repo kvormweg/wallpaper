@@ -223,7 +223,7 @@ function _wp_tpl_pageinfo(){
 
   // echo it
   if($INFO['exists']) {
-    echo $lang['lastmod'], ' ', $date;
+    echo '<span class="resp">', $lang['lastmod'], '</span> ', $date;
     if($_SERVER['REMOTE_USER']) {
       if($INFO['editor']) {
         echo ' ',$lang['by'],' ', $INFO['editor'];
