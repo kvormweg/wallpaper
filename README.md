@@ -19,6 +19,8 @@ The resizable fake background image was inspired by Chris Coyier (http://css-tri
 
 Menu animation inspired by Brian Huisman (http://www.greywyvern.com/?post=337)
 
+Hamburger menu without javascript inspired by Austin Wulf (http://www.sitepoint.com/pure-css-off-screen-navigation-menu/)
+
 ## Installation
 
 Unpack the file into the `/lib/tpl` directory of your Dokuwiki installation. It will create a directory named `wallpaper`. You can also use the bundled plugin installer.
