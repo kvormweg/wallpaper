@@ -53,19 +53,19 @@ img#fakebackground {
 /* --------------------- Text formating -------------------------------- */
 
 /* external link */
-a.urlextern:after {
+a.urlextern::after {
    content: " [" attr(href) "]";
    font-size: 90%;
 }
 
 /* interwiki link */
-a.interwiki:after {
+a.interwiki::after {
    content: " [" attr(href) "]";
    font-size: 90%;
 }
 
 /* email link */
-a.mail:after {
+a.mail::after {
    content: " [" attr(href) "]";
    font-size: 90%;
 }

@@ -678,8 +678,6 @@ it's dirty, so any "real" fixes are welcome */
 }
 
 #mediamanager__diff .imageDiff.opacity .image2 {
-    -moz-opacity: 0.5;
-    -khtml-opacity: 0.5;
     opacity: 0.5;
 }
 
