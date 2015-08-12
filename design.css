@@ -414,7 +414,7 @@ div.dokuwiki form#dw__editform div.license {
 /* --------- buttons ------------------- */
 
 div.dokuwiki input.button,
-div.dokuwiki button.button {
+div.dokuwiki button {
   border: 1px solid __border__;
   color: __text__;
   background-color: __background_neu__;
@@ -432,16 +432,11 @@ div.dokuwiki button.button {
   height: 1.8em;
 }
 
-div.dokuwiki div.secedit input.button {
-  border: 1px solid __border__;
-  color: __text__;
+div.dokuwiki div.secedit input.button,
+div.dokuwiki div.secedit button {
   background-color: transparent;
-  vertical-align: middle;
-  text-decoration: none;
   margin-bottom: 0.35em;
   padding: 0;
-  font-size: 10px;
-  cursor: pointer;
   float: right;
   display: inline;
 }
@@ -574,18 +569,24 @@ div.dokuwiki img.medialeft {
   border: 0;
   float: left;
   margin: 0 1.5em 0 0;
+  max-width: 100%;
+  height: auto;
 }
 
 div.dokuwiki img.mediaright {
   border: 0;
   float: right;
   margin: 0 0 0 1.5em;
+  max-width: 100%;
+  height: auto;
 }
 
 div.dokuwiki img.mediacenter {
   border: 0;
   display: block;
   margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 /* smileys */
@@ -1209,6 +1210,11 @@ label[for="hamburger"] {
     padding-right: 0;
     background-image: none;
   }
+}
+@media (max-width: 579px) {
+	div.dokuwiki img.medialeft, div.dokuwiki img.mediaright {
+	  float: none;
+	}
 }
 @media (max-width: 379px) {
   .resp {
