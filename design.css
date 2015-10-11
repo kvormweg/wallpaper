@@ -318,7 +318,8 @@ div.dokuwiki form#dw__login fieldset {
 	margin-bottom: 2em;
 }
 
-div.dokuwiki form#dw__login fieldset input.button {
+div.dokuwiki form#dw__login fieldset input.button,
+div.dokuwiki form#dw__login fieldset button {
 	color: __text__;
 }
 
@@ -428,7 +429,7 @@ div.dokuwiki button {
 }
 
 * html div.dokuwiki input.button,
-* html div.dokuwiki button.button {
+* html div.dokuwiki button {
   height: 1.8em;
 }
 
@@ -1136,7 +1137,7 @@ div.plugin_translation {
   display: none;
 }
 
-/* reponsiveness */
+/* responsiveness */
 /* hamburger */
 input#hamburger {
   position: absolute;

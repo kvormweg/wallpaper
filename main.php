@@ -21,7 +21,7 @@ echo '<!DOCTYPE html>
 tpl_pagetitle();
 echo ' [', strip_tags($conf['title']), ']';
 echo '  </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">',"\n";
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />',"\n";
 tpl_metaheaders();
 echo tpl_favicon(array('favicon', 'mobile'));
 if($conf['tpl']['wallpaper']['fixedbackground']) {
