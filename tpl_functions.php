@@ -254,14 +254,15 @@ function _wp_tpl_bgimage() {
     } else {
       $sep = '/'.$nsarr[($j-1)];
     }
-    $pn = 'data/media/'.implode('/',$ptarr).$sep.'_bg.jpg';
-    if(file_exists(DOKU_INC.$pn)) {
-      return DOKU_URL.$pn;
+    $pn = implode('/',$ptarr).$sep.'_bg.jpg';
+    if(file_exists(DOKU_INC.'data/media/'.$pn)) {
+      return ml(str_replace('/', ':', $pn));
     }
   }
   return DOKU_TPL.'images/bg.jpg';
 }
-/*/**
+
+/*
  * Hierarchical breadcrumbs
  *
  * This code was suggested as replacement for the usual breadcrumbs.
