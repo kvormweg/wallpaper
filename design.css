@@ -596,6 +596,9 @@ div.dokuwiki img.icon {
 }
 
 div.dokuwiki abbr {
+  font-style: normal;
+  text-decoration: none;
+  font-variant: normal;
   cursor: help;
   border-bottom: 1px dotted __text__;
 }
