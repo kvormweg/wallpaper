@@ -35,10 +35,6 @@ function _wp_tpl_mainmenu() {
     $start = 'start';
   }
 
-  $ns = dirname(str_replace(':','/',$ID));
-  if($ns == '.') $ns ='';
-  $ns  = utf8_encodeFN(str_replace(':','/',$ns));
-
   $data = array();
   $ff = TRUE;
   if($conf['tpl'][$tpl]['usemenufile']) {
@@ -107,12 +103,18 @@ function _wp_tpl_mainmenu() {
     	  $item['level'] = 2;
     	}
     }
-    if($item['id'] == $start or preg_match('/:'.$start.'$/',$item['id'])) {
+    if($item['id'] == $start or preg_match('/:'.$start.'$/',$item['id']) 
+       or preg_match('/(\w+):\1$/',$item['id'])) {
       continue;
     }
-    $data2[] = $item;
+    if(array_key_exists($item['id'], $data2)) {
+      $data2[$item['id']]['type'] = 'd';
+      $data2[$item['id']]['ns'] = $item['id'];
+      continue;
+    } 
+    $data2[$item['id']] = $item;
   }
-  echo html_buildlist($data2,'idx','_wp_tpl_list_index','html_li_index');
+  echo html_buildlist($data2,'idx','_wp_tpl_list_index','_wp_tpl_html_li_index');
 }
 
 /* Index item formatter
@@ -125,6 +127,8 @@ function _wp_tpl_list_index($item){
   if($item['type']=='d'){
     if(@file_exists(wikiFN($item['id'].':'.$conf['start']))) {
       $ret .= html_wikilink($item['id'].':'.$conf['start'], $item['title']);
+    } elseif(@file_exists(wikiFN($item['id'].':'.$item['id']))) {
+      $ret .= html_wikilink($item['id'].':'.$item['id'], $item['title']);
     } else {
       $ret .= html_wikilink($item['id'].':', $item['title']);
     }
@@ -133,6 +137,35 @@ function _wp_tpl_list_index($item){
   }
   return $ret;
 }
+
+/**
+ * Index List item
+ *
+ * This user function is used in html_buildlist to build the
+ * <li> tags for namespaces when displaying the page index
+ * it gives different classes to opened or closed "folders"
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ *
+ * @param array $item
+ * @return string html
+ */
+function _wp_tpl_html_li_index($item){
+  global $INFO;
+
+  $class = '';
+  $id = '';
+
+  if($item['type'] == "f"){
+    // scroll to the current item
+    return '<li class="level'.$item['level'].$class.'" '.$id.'>';
+  } elseif($item['open']) {
+    return '<li class="open">';
+  } else {
+    return '<li class="closed">';
+  }
+}
+
 
 function _wp_tpl_parsemenufile(&$data, $filename, $start) {
   $ret = TRUE;
