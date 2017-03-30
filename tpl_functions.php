@@ -38,33 +38,33 @@ function _wp_tpl_mainmenu() {
   $data = array();
   $ff = TRUE;
   if($conf['tpl'][$tpl]['usemenufile']) {
-  	if($conf['tpl'][$tpl]['menufilename']) {
-  		$menufilename = $conf['tpl'][$tpl]['menufilename'];
-  	} else {
-  		$menufilename = 'menu';
-		}
-		$filepath = wikiFN($menufilename);
-		if(!file_exists($filepath)) {
-			$ff = FALSE;
-		} else {
-  		_wp_tpl_parsemenufile($data, $menufilename, $start);
-		}
+    if($conf['tpl'][$tpl]['menufilename']) {
+      $menufilename = $conf['tpl'][$tpl]['menufilename'];
+    } else {
+      $menufilename = 'menu';
+    }
+    $filepath = wikiFN($menufilename);
+    if(!file_exists($filepath)) {
+      $ff = FALSE;
+    } else {
+      _wp_tpl_parsemenufile($data, $menufilename, $start);
+    }
   }
   if(!$conf['tpl'][$tpl]['usemenufile'] or ($conf['tpl'][$tpl]['usemenufile'] and !$ff)) {
-  	search($data,$conf['datadir'],'search_universal',$opts);
+    search($data,$conf['datadir'],'search_universal',$opts);
   }
   $i = 0;
   $cleanindexlist = array();
   if($conf['tpl'][$tpl]['cleanindexlist']) {
-   	$cleanindexlist = explode(',', $conf['tpl'][$tpl]['cleanindexlist']);
-   	$i = 0;
-   	foreach($cleanindexlist as $tmpitem) {
-   		$cleanindexlist[$i] = trim($tmpitem);
-   		$i++;
-   	}
-	}
+     $cleanindexlist = explode(',', $conf['tpl'][$tpl]['cleanindexlist']);
+     $i = 0;
+     foreach($cleanindexlist as $tmpitem) {
+       $cleanindexlist[$i] = trim($tmpitem);
+       $i++;
+     }
+  }
   $data2 = array();
-	$first = true;
+  $first = true;
   foreach($data as $item) {
     if($conf['tpl'][$tpl]['cleanindex']) {
       if(strpos($item['id'],'playground') !== false
@@ -72,36 +72,36 @@ function _wp_tpl_mainmenu() {
         continue;
       }
       if(count($cleanindexlist)) {
-      	if(strpos($item['id'], ':')) {
-      		list($tmpitem) = explode(':',$item['id']);
-      	} else {
-      		$tmpitem = $item['id'];
-      	}
-	      if(in_array($tmpitem, $cleanindexlist)) {
-	        continue;
-	      }
-			}
+        if(strpos($item['id'], ':')) {
+          list($tmpitem) = explode(':',$item['id']);
+        } else {
+          $tmpitem = $item['id'];
+        }
+        if(in_array($tmpitem, $cleanindexlist)) {
+          continue;
+        }
+  }
     }
     if(strpos($item['id'],$menufilename) !== false and $item['level'] == 1) {
-    	continue;
+      continue;
     }
     if($conf['tpl'][$tpl]['hiderootlinks']) {
-			$item2 = array();
-    	if($item['type'] == 'f' and !$item['ns'] and $item['id']) {
-    	  if($first) {
-        	$item2['id'] = $start;
-	        $item2['ns'] = 'root';
+      $item2 = array();
+      if($item['type'] == 'f' and !$item['ns'] and $item['id']) {
+        if($first) {
+          $item2['id'] = $start;
+          $item2['ns'] = 'root';
           $item2['perm'] = 8;
           $item2['type'] = 'd';
           $item2['level'] = 1;
           $item2['open'] = 1;
           $item2['title'] = $conf['tpl'][$tpl]['rootmenutext'];
-	        $data2[] = $item2;
+          $data2[] = $item2;
           $first = false;
         }
-    	  $item['ns'] = 'root';
-    	  $item['level'] = 2;
-    	}
+        $item['ns'] = 'root';
+        $item['level'] = 2;
+      }
     }
     if($item['id'] == $start or preg_match('/:'.$start.'$/',$item['id']) 
        or preg_match('/(\w+):\1$/',$item['id'])) {
@@ -113,6 +113,9 @@ function _wp_tpl_mainmenu() {
       continue;
     } 
     $data2[$item['id']] = $item;
+  }
+  if(!array_key_exists(0, $data2)) {
+    $data2[0]['level'] = 1;
   }
   echo html_buildlist($data2,'idx','_wp_tpl_list_index','_wp_tpl_html_li_index');
 }
@@ -169,74 +172,74 @@ function _wp_tpl_html_li_index($item){
 
 function _wp_tpl_parsemenufile(&$data, $filename, $start) {
   $ret = TRUE;
-	$filepath = wikiFN($filename);
-	if(file_exists($filepath)) {
-		$lines = file($filepath);
-		$i = 0;
-		$lines2 = array();
+  $filepath = wikiFN($filename);
+  if(file_exists($filepath)) {
+    $lines = file($filepath);
+    $i = 0;
+    $lines2 = array();
 // read only lines formatted as wiki lists
-		foreach($lines as $line) {
-			if(preg_match('/^\s+\*/', $line)) {
-				$lines2[] = $line;
-			}
-			$i++;
-		}
-		$numlines = count($lines2);
-		$oldlevel = 0;
+    foreach($lines as $line) {
+      if(preg_match('/^\s+\*/', $line)) {
+        $lines2[] = $line;
+      }
+      $i++;
+    }
+    $numlines = count($lines2);
+    $oldlevel = 0;
 // Array is read back to forth so pages with children can be found easier
 // you do not have to go back in the array if a child entry is found
-		for($i = $numlines - 1;$i >= 0; $i--) {
-			if(!$lines2[$i]) {
-				continue;
-			}
-			$tmparr = explode('*', $lines2[$i]);
-			$level = intval(strlen($tmparr[0]) / 2);
-			if($level > 3) {
-				$level = 3;
-			}
-// ignore lines without links
-			if(!preg_match('/\s*\[\[[^\]]+\]\]/', $tmparr[1])) {
-				continue;
-			}
-			$tmparr[1] = str_replace(array(']','['),'',trim($tmparr[1]));
-			list($id, $title) = explode('|', $tmparr[1]);
-// ignore links to non-existing pages
-			if(!file_exists(wikiFN($id))) {
-				continue;
-			}
-      if(!$title) {
-      	$title = p_get_first_heading($id);
+    for($i = $numlines - 1;$i >= 0; $i--) {
+      if(!$lines2[$i]) {
+        continue;
       }
-			$data[$i]['id'] = $id;
+      $tmparr = explode('*', $lines2[$i]);
+      $level = intval(strlen($tmparr[0]) / 2);
+      if($level > 3) {
+        $level = 3;
+      }
+// ignore lines without links
+      if(!preg_match('/\s*\[\[[^\]]+\]\]/', $tmparr[1])) {
+        continue;
+      }
+      $tmparr[1] = str_replace(array(']','['),'',trim($tmparr[1]));
+      list($id, $title) = explode('|', $tmparr[1]);
+// ignore links to non-existing pages
+      if(!file_exists(wikiFN($id))) {
+        continue;
+      }
+      if(!$title) {
+        $title = p_get_first_heading($id);
+      }
+      $data[$i]['id'] = $id;
       $data[$i]['ns'] = '';
       $data[$i]['perm'] = 8;
       $data[$i]['type'] = 'f';
-			$data[$i]['level'] = $level;
+      $data[$i]['level'] = $level;
       $data[$i]['open'] = 1;
-			$data[$i]['title'] = $title;
+      $data[$i]['title'] = $title;
 // namespaces must be tagged correctly (type = 'd') or they will not be found by the
 // html_wikilink function : means that they will marked as having subpages
 // even if there is no submenu
-			if(strpos($id,':') !== FALSE) {
-				$nsarray = explode(':', $id);
-				$pid = array_pop($nsarray);
-				$nspace = implode(':',$nsarray);
-				if($pid == $start) {
-					$data[$i]['id'] = $nspace;
-					$data[$i]['type'] = 'd';
-				} else {
-					$data[$i]['ns'] = $nspace;
-				}
-			}
-			if($oldlevel > $level) {
-				$data[$i]['type'] = 'd';
-			}
-			$oldlevel = $level;
-		}
-	} else {
-		$ret = FALSE;
-	}
-	ksort($data);
+      if(strpos($id,':') !== FALSE) {
+        $nsarray = explode(':', $id);
+        $pid = array_pop($nsarray);
+        $nspace = implode(':',$nsarray);
+        if($pid == $start) {
+          $data[$i]['id'] = $nspace;
+          $data[$i]['type'] = 'd';
+        } else {
+          $data[$i]['ns'] = $nspace;
+        }
+      }
+      if($oldlevel > $level) {
+        $data[$i]['type'] = 'd';
+      }
+      $oldlevel = $level;
+    }
+  } else {
+    $ret = FALSE;
+  }
+  ksort($data);
   return $ret;
 }
 
@@ -314,7 +317,7 @@ function _wp_tpl_youarehere($sep = ' » ') {
   global $ID;
   global $lang;
 
-	$lspace = $_SESSION[DOKU_COOKIE]['translationlc'];
+  $lspace = $_SESSION[DOKU_COOKIE]['translationlc'];
 
   // check if enabled
   if(!$conf['youarehere']) return false;
