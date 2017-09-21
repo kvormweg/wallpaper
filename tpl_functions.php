@@ -37,12 +37,12 @@ function _wp_tpl_mainmenu() {
 
   $data = array();
   $ff = TRUE;
+  if($conf['tpl'][$tpl]['menufilename']) {
+    $menufilename = $conf['tpl'][$tpl]['menufilename'];
+  } else {
+    $menufilename = 'menu';
+  }
   if($conf['tpl'][$tpl]['usemenufile']) {
-    if($conf['tpl'][$tpl]['menufilename']) {
-      $menufilename = $conf['tpl'][$tpl]['menufilename'];
-    } else {
-      $menufilename = 'menu';
-    }
     $filepath = wikiFN($menufilename);
     if(!file_exists($filepath)) {
       $ff = FALSE;
@@ -50,73 +50,79 @@ function _wp_tpl_mainmenu() {
       _wp_tpl_parsemenufile($data, $menufilename, $start);
     }
   }
+  $data2 = array();
   if(!$conf['tpl'][$tpl]['usemenufile'] or ($conf['tpl'][$tpl]['usemenufile'] and !$ff)) {
     search($data,$conf['datadir'],'search_universal',$opts);
-  }
-  $i = 0;
-  $cleanindexlist = array();
-  if($conf['tpl'][$tpl]['cleanindexlist']) {
-     $cleanindexlist = explode(',', $conf['tpl'][$tpl]['cleanindexlist']);
-     $i = 0;
-     foreach($cleanindexlist as $tmpitem) {
-       $cleanindexlist[$i] = trim($tmpitem);
-       $i++;
-     }
-  }
-  $data2 = array();
-  $first = true;
-  foreach($data as $item) {
-    if($conf['tpl'][$tpl]['cleanindex']) {
-      if(strpos($item['id'],'playground') !== false
-         or strpos($item['id'], 'wiki') !== false) {
-        continue;
-      }
-      if(count($cleanindexlist)) {
-        if(strpos($item['id'], ':')) {
-          list($tmpitem) = explode(':',$item['id']);
-        } else {
-          $tmpitem = $item['id'];
+    $i = 0;
+    $cleanindexlist = array();
+    if($conf['tpl'][$tpl]['cleanindexlist']) {
+       $cleanindexlist = explode(',', $conf['tpl'][$tpl]['cleanindexlist']);
+       $i = 0;
+       foreach($cleanindexlist as $tmpitem) {
+         $cleanindexlist[$i] = trim($tmpitem);
+         $i++;
+       }
+    }
+    $first = true;
+    $i = 0;
+    $countroot = 0;
+    foreach($data as $item) {
+      if($conf['tpl'][$tpl]['hiderootlinks']) {
+        $item2 = array();
+        if($item['type'] == 'f' and !$item['ns'] and $item['id']) {
+          if($first) {
+            $item2['id'] = $start;
+            $item2['ns'] = 'root';
+            $item2['perm'] = 8;
+            $item2['type'] = 'd';
+            $item2['level'] = 1;
+            $item2['open'] = 1;
+            $item2['title'] = $conf['tpl'][$tpl]['rootmenutext'];
+            $data2[$i] = $item2;
+            $i++;
+            $first = false;
+          }
+          $item['ns'] = 'root';
+          $item['level'] = 2;
+          $countroot++;
         }
-        if(in_array($tmpitem, $cleanindexlist)) {
+      }
+      if($conf['tpl'][$tpl]['cleanindex']) {
+        if(strpos($item['id'],'playground') !== false
+           or strpos($item['id'], 'wiki') !== false) {
           continue;
         }
-  }
-    }
-    if(strpos($item['id'],$menufilename) !== false and $item['level'] == 1) {
-      continue;
-    }
-    if($conf['tpl'][$tpl]['hiderootlinks']) {
-      $item2 = array();
-      if($item['type'] == 'f' and !$item['ns'] and $item['id']) {
-        if($first) {
-          $item2['id'] = $start;
-          $item2['ns'] = 'root';
-          $item2['perm'] = 8;
-          $item2['type'] = 'd';
-          $item2['level'] = 1;
-          $item2['open'] = 1;
-          $item2['title'] = $conf['tpl'][$tpl]['rootmenutext'];
-          $data2[] = $item2;
-          $first = false;
+        if(count($cleanindexlist)) {
+          if(strpos($item['id'], ':')) {
+            list($tmpitem) = explode(':',$item['id']);
+          } else {
+            $tmpitem = $item['id'];
+          }
+          if(in_array($tmpitem, $cleanindexlist)) {
+            continue;
+          }
         }
-        $item['ns'] = 'root';
-        $item['level'] = 2;
       }
+      if($item['id'] == $menufilename) {
+        continue;
+      }
+      if($item['id'] == $start or preg_match('/:'.$start.'$/',$item['id'])
+         or preg_match('/(\w+):\1$/',$item['id'])) {
+        continue;
+      }
+      $data2[$i] = $item;
+      $i++;
     }
-    if($item['id'] == $start or preg_match('/:'.$start.'$/',$item['id']) 
-       or preg_match('/(\w+):\1$/',$item['id'])) {
-      continue;
+    if($countroot) {
+      $pos = $i - $countroot + 2;
+      $tmparr = array_splice($data2,$pos);
+      $data2 = array_merge($tmparr, $data2);
     }
-    if(array_key_exists($item['id'], $data2)) {
-      $data2[$item['id']]['type'] = 'd';
-      $data2[$item['id']]['ns'] = $item['id'];
-      continue;
-    } 
-    $data2[$item['id']] = $item;
+//    ksort($data2);
+  } else {
+    $data2 = $data;
   }
-  if(!array_key_exists(0, $data2)) {
-    $data2[0]['level'] = 1;
-  }
+  // print_r($data2);
   echo html_buildlist($data2,'idx','_wp_tpl_list_index','_wp_tpl_html_li_index');
 }
 
