@@ -1,7 +1,7 @@
 base     wallpaper
 author   Klaus Vormweg
 email    klaus.vormweg@gmx.de
-date     2017-03-30
+date     2017-09-20
 name     Wallpaper Template
 desc     DokuWiki template with drop-down menu
 url      http://www.tuhh.de/~psvkv/wallpaper/index.html
