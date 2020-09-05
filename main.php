@@ -97,7 +97,7 @@ if($ACT != 'diff' && $ACT != 'edit' && $ACT != 'preview' && $ACT != 'admin' && $
 }
 echo '    <div class="bar" id="bar__bottom">
        <div class="bar-left" id="bar__bottomleft">',"\n";
-tpl_button('admin');
+tpl_button('backlink');
 if($ACT != 'login' && $ACT != 'logout') {
   tpl_button('login');
   echo '&nbsp;';
@@ -106,6 +106,7 @@ if($_SERVER['REMOTE_USER']){
   tpl_button('subscribe');
   tpl_button('profile');
   tpl_button('history');
+  tpl_button('admin');
 }
 echo '&nbsp;
        </div>
